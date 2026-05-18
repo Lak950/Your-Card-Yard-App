@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Car Yard</title>
+  <style>
+    :root{
+      --navy:#07357d;
+      --navy-dark:#052a63;
+      --navy-deep:#03295b;
+      --blue:#0d57bf;
+      --blue2:#165ec7;
+      --orange:#ff7a00;
+      --orange-dark:#f26f00;
+      --text:#16315f;
+      --muted:#5c6b85;
+      --line:#d7dbe4;
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --ok:#1e7a35;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#1c2c4d}
+    button,input,select,textarea{font:inherit}
+    a{text-decoration:none;color:inherit}
+    .topbar{
+      background:linear-gradient(180deg,var(--navy) 0%, var(--navy-dark) 100%);
+      color:#fff;
+      padding:22px 24px 14px;
+    }
+    .topbar-inner{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+    .brand{display:flex;align-items:center;gap:18px;min-width:0}
+    .logo-ring{width:98px;height:98px;border:8px solid var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 98px}
+    .logo-ring svg{width:54px;height:54px;fill:#fff}
+    .brand-text h1{margin:0;font-size:66px;line-height:0.96;font-weight:700;letter-spacing:-1.6px;font-stretch:condensed;white-space:nowrap}
+    .brand-text p{margin:14px 0 0;font-size:30px;line-height:1.05;font-weight:400}
+    .top-actions{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:18px;min-width:300px}
+    .phone-row{font-size:30px;font-weight:700;display:flex;align-items:center;gap:14px}
+    .phone-row .icon{font-size:34px}
+    .contact-row{display:flex;gap:38px;align-items:center;font-size:26px;font-weight:700;color:#ffb13b}
+    .contact-row .contact{display:flex;gap:10px;align-items:center}
+    .contact-row .contact svg{width:28px;height:28px;fill:currentColor}
+
+    .nav-strip{background:var(--navy-deep);box-shadow:0 2px 0 rgba(0,0,0,.04)}
+    .nav-inner{max-width:1440px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .nav-links{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+    .nav-btn{color:#fff;padding:16px 22px;font-size:18px;font-weight:700;border-radius:8px;letter-spacing:.2px}
+    .nav-btn.active{background:linear-gradient(180deg,#ff8b1a,#ff7900)}
+    .nav-btn.admin{border:1px solid rgba(255,255,255,.25)}
+    .enquire-top{background:linear-gradient(180deg,#ff8a18,#ff7600);color:#fff;padding:16px 28px;border-radius:8px;font-weight:700;font-size:18px;display:flex;gap:10px;align-items:center;box-shadow:0 2px 0 rgba(0,0,0,.1)}
+
+    .page{max-width:1440px;margin:22px auto;padding:0 24px 30px}
+    .search-row{display:grid;grid-template-columns:1fr 320px;gap:28px;margin-bottom:22px;align-items:center}
+    .search-wrap{position:relative}
+    .search-wrap input{width:100%;height:68px;border:2px solid #d8dce6;border-radius:12px;padding:0 20px 0 66px;font-size:22px;color:#3a4460;background:#fff}
+    .search-wrap .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:32px;height:32px;fill:#667186}
+    .show-all{height:68px;border:0;border-radius:10px;background:linear-gradient(180deg,#0e58bf,#0c49a6);color:#fff;font-size:19px;font-weight:700;cursor:pointer}
+
+    .content-grid{display:grid;grid-template-columns:310px 1fr;gap:22px}
+    .filters,.vehicle-panel,.footer-card,.admin-panel,.modal-card{background:#fff;border:2px solid var(--line);border-radius:16px}
+    .filters{padding:24px 22px;align-self:start}
+    .filters h2{margin:0 0 22px;font-size:28px;color:var(--navy);font-weight:800}
+    .field{margin-bottom:20px}
+    .field label{display:block;font-size:17px;font-weight:700;color:#222;margin-bottom:10px}
+    .field input,.field select,.field textarea{width:100%;border:2px solid var(--line);border-radius:10px;height:56px;padding:0 14px;background:#fff;color:#222;font-size:16px}
+    .field textarea{height:100px;padding:12px 14px;resize:vertical}
+    .inline-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    .vehicle-panel{padding:20px}
+    .vehicle-main{display:grid;grid-template-columns:620px 1fr;gap:26px;align-items:start}
+    .image-block{position:relative}
+    .main-image{width:100%;aspect-ratio:16/9;border-radius:6px;border:1px solid #d4d7df;overflow:hidden;background:#edf1f8}
+    .main-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .ribbon{position:absolute;left:0;top:16px;background:linear-gradient(180deg,#ff8a18,#ff7200);color:#fff;font-size:24px;font-weight:800;padding:12px 34px 12px 22px;transform:skew(-26deg);box-shadow:0 2px 0 rgba(0,0,0,.1)}
+    .ribbon span{display:block;transform:skew(26deg)}
+    .thumbs{display:grid;grid-template-columns:repeat(6, 1fr);gap:8px;margin-top:12px}
+    .thumb{aspect-ratio:4/3;border:2px solid #d5d9e2;border-radius:8px;background:#eef1f7;overflow:hidden;cursor:pointer}
+    .thumb.active{border-color:var(--orange);box-shadow:0 0 0 2px rgba(255,122,0,.15) inset}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .detail-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:14px}
+    .detail-head h3{margin:0;font-size:26px;color:var(--navy);font-weight:800;line-height:1.15}
+    .share{color:var(--blue);font-weight:700;font-size:14px;display:flex;gap:8px;align-items:center;cursor:pointer}
+    .share svg{width:24px;height:24px;fill:currentColor}
+    .meta-grid{display:grid;grid-template-columns:repeat(3, max-content);gap:22px 28px;margin:22px 0}
+    .meta-item{display:flex;align-items:center;gap:12px;color:#202c45;font-size:17px}
+    .meta-item svg{width:26px;height:26px;fill:#1e355c;flex:0 0 26px}
+    .price-row{display:flex;align-items:center;gap:18px;margin:12px 0 24px}
+    .price{font-size:46px;font-weight:800;color:var(--orange-dark);letter-spacing:-1px}
+    .price-badge{background:linear-gradient(180deg,#1d67cb,#0f51b7);color:#fff;border-radius:10px;padding:12px 18px;font-size:18px;font-weight:700}
+    .enquiry-row{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:14px}
+    .btn-call,.btn-text,.btn-email{padding:18px 22px;border-radius:10px;font-weight:700;font-size:18px;display:inline-flex;gap:12px;align-items:center;border:2px solid transparent}
+    .btn-call{background:linear-gradient(180deg,#ff8b19,#ff7300);color:#fff}
+    .btn-text{background:linear-gradient(180deg,#1b67cd,#0d53bb);color:#fff}
+    .btn-email{background:#fff;color:#15408e;border-color:#265fbc}
+    .btn-call svg,.btn-text svg,.btn-email svg{width:24px;height:24px;fill:currentColor}
+    .optional-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .optional-badges .mini{background:#f2f6fb;border:1px solid #d7ddeb;border-radius:999px;padding:8px 12px;font-size:14px;color:#2a3c63}
+    .hidden{display:none!important}
+
+    .footer-card{margin-top:18px;padding:22px 26px}
+    .footer-grid{display:grid;grid-template-columns:1.2fr 1.1fr 1fr 1.2fr;gap:24px;align-items:start}
+    .footer-item{display:flex;gap:14px;align-items:flex-start;color:#1f2b44}
+    .footer-item h4{margin:0 0 10px;font-size:18px;color:#1f2b44}
+    .footer-item p,.footer-item div,.footer-item a{margin:0;font-size:16px;line-height:1.45;color:#303d57}
+    .footer-item svg{width:34px;height:34px;fill:#1556ba;flex:0 0 34px}
+    .socials{display:flex;gap:12px;margin-top:8px}
+    .socials a{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+    .fb{background:#255cbe}.ig{background:#f04c78}.yt{background:#ef1d1d}
+    .copy{text-align:right}
+
+    .admin-panel{margin-top:24px;padding:24px}
+    .admin-panel h2{margin:0 0 18px;color:var(--navy)}
+    .admin-panel .section-title{margin:28px 0 14px;font-size:20px;color:#1f3f7c;font-weight:800;border-top:1px solid #e2e6ef;padding-top:18px}
+    .check-row{display:flex;gap:12px;align-items:center;margin:10px 0 14px;color:#1f2b44;font-size:15px}
+    .check-row input{width:auto;height:auto}
+    .form-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px}
+    .primary-btn,.secondary-btn,.danger-btn{border:0;border-radius:10px;padding:14px 20px;font-weight:700;cursor:pointer}
+    .primary-btn{background:linear-gradient(180deg,#0f57be,#0c49a7);color:#fff}
+    .secondary-btn{background:#eef3fb;color:#174593;border:1px solid #cbd7ef}
+    .danger-btn{background:#ffebe8;color:#c43720;border:1px solid #f3c1b8}
+    .stock-list{display:grid;gap:10px;margin-top:18px}
+    .stock-item{border:1px solid #dce2ee;border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .stock-item strong{display:block;font-size:16px;color:#16315f}
+    .stock-item span{font-size:14px;color:#67748e}
+    .stock-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+    .pin-modal{position:fixed;inset:0;background:rgba(4,16,40,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}
+    .modal-card{max-width:420px;width:100%;padding:24px}
+    .modal-card h3{margin:0 0 10px;color:var(--navy)}
+    .modal-card p{margin:0 0 14px;color:#596882}
+
+    @media (max-width:1200px){
+      .brand-text h1{font-size:52px}.brand-text p{font-size:24px}
+      .vehicle-main{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:900px){
+      .topbar-inner,.nav-inner{flex-direction:column;align-items:flex-start}.top-actions{align-items:flex-start;text-align:left}
+      .search-row{grid-template-columns:1fr}.content-grid{grid-template-columns:1fr}.filters{order:2}.vehicle-panel{order:1}
+      .copy{text-align:left}.footer-grid{grid-template-columns:1fr}
+      .meta-grid{grid-template-columns:1fr 1fr}.nav-links{gap:12px}.nav-btn{padding:12px 14px}
+    }
+    @media (max-width:640px){
+      .topbar{padding:18px 16px 12px}.nav-inner,.page{padding-left:16px;padding-right:16px}.brand{align-items:flex-start}.logo-ring{width:76px;height:76px;flex-basis:76px;border-width:6px}.logo-ring svg{width:42px;height:42px}
+      .brand-text h1{font-size:34px;white-space:normal}.brand-text p{font-size:18px;margin-top:8px}
+      .phone-row{font-size:20px}.contact-row{font-size:18px;gap:18px;flex-wrap:wrap}
+      .show-all,.search-wrap input{height:56px;font-size:17px}.search-wrap .search-icon{width:24px;height:24px;left:16px}.search-wrap input{padding-left:50px}
+      .filters h2{font-size:24px}.detail-head h3{font-size:22px}.price{font-size:36px}.enquiry-row{gap:10px}.btn-call,.btn-text,.btn-email{width:100%;justify-content:center;padding:14px}
+      .meta-grid{grid-template-columns:1fr}.thumbs{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo-ring">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M15.6 34.1 20.2 22c1-2.7 3.6-4.5 6.5-4.5h10.6c2.9 0 5.5 1.8 6.5 4.5l4.6 12.1c3.2 1 5.6 4 5.6 7.6v8.1c0 1.3-1.1 2.4-2.4 2.4h-3.5c-1.3 0-2.4-1.1-2.4-2.4v-2.1H17.8v2.1c0 1.3-1.1 2.4-2.4 2.4h-3.5c-1.3 0-2.4-1.1-2.4-2.4v-8.1c0-3.6 2.4-6.6 6.1-7.6Zm8.3-9.8-3.1 8.2h22.4l-3.1-8.2c-.4-1.1-1.5-1.9-2.7-1.9H26.6c-1.2 0-2.3.8-2.7 1.9Zm-3.7 18.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Zm23.6 0a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z"/></svg>
+        </div>
+        <div class="brand-text">
+          <h1 id="bizName">Your Car Yard</h1>
+          <p id="tagline">Affordable cars. Easy buying.</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="phone-row"><span class="icon">📞</span><span id="phoneDisplay">0412 345 678</span></div>
+        <div class="contact-row">
+          <a class="contact" id="callQuick" href="tel:0412345678"><span>📞</span><span>Call</span></a>
+          <a class="contact" id="smsQuick" href="sms:0412345678"><span>💬</span><span>Text</span></a>
+          <a class="contact" id="emailQuick" href="mailto:hello@yourcaryard.com.au"><span>✉️</span><span>Email</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-strip">
+    <div class="nav-inner">
+      <div class="nav-links">
+        <a href="#" class="nav-btn active">HOME</a>
+        <a href="#browse" class="nav-btn">BROWSE CARS</a>
+        <a href="#" class="nav-btn" id="aboutNavBtn">ABOUT US</a>
+        <a href="#" class="nav-btn">CONTACT</a>
+        <button class="nav-btn admin" id="adminButton" type="button">ADMIN</button>
+      </div>
+      <a class="enquire-top" id="enquireTop" href="tel:0412345678">ENQUIRE NOW 📞</a>
+    </div>
+  </div>
+
+  <div class="page">
+    <div id="userView">
+      <div class="search-row">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24"><path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-8 6a8 8 0 1 1 14.32 4.9l5.39 5.39-1.42 1.42-5.39-5.39A8 8 0 0 1 2 10Z"/></svg>
+          <input id="searchInput" type="text" placeholder="Search all cars by make, model, year, colour or price" />
+        </div>
+        <button class="show-all" id="showAllBtn" type="button">SHOW ALL CARS</button>
+      </div>
+
+      <div class="content-grid" id="browse">
+        <aside class="filters">
+          <h2>Browse Cars</h2>
+          <div class="field"><label for="filterMake">Make</label><select id="filterMake"><option value="">All Makes</option></select></div>
+          <div class="field"><label for="filterModel">Model</label><select id="filterModel"><option value="">All Models</option></select></div>
+          <div class="field"><label for="filterBody">Body Type</label><select id="filterBody"><option value="">All Types</option></select></div>
+          <div class="field"><label for="filterFuel">Fuel Type</label><select id="filterFuel"><option value="">All Fuel Types</option></select></div>
+          <div class="check-row"><input type="checkbox" id="hideSoldToggle"><label for="hideSoldToggle" style="margin:0">Hide sold cars</label></div>
+        </aside>
+
+        <section>
+          <div class="vehicle-panel">
+            <div class="vehicle-main">
+              <div class="image-block">
+                <div class="ribbon" id="featuredRibbon"><span>FEATURED</span></div>
+                <div class="main-image"><img id="mainImage" alt="Vehicle image" /></div>
+                <div class="thumbs" id="thumbs"></div>
+              </div>
+
+              <div class="details-block">
+                <div class="detail-head">
+                  <h3 id="vehicleTitle">2018 Volkswagen Golf 110TSI</h3>
+                  <div class="share" id="shareBtn">
+                    <svg viewBox="0 0 24 24"><path d="M18 16a3 3 0 0 0-2.39 1.2l-6.8-3.4a3.25 3.25 0 0 0 0-1.6l6.8-3.4A3 3 0 1 0 15 7a2.5 2.5 0 0 0 .05.5l-6.79 3.39a3 3 0 1 0 0 2.22l6.79 3.39A3 3 0 1 0 18 16Z"/></svg>
+                    <span>Share</span>
+                  </div>
+                </div>
+
+                <div class="meta-grid">
+                  <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M5 11h14l-1.2-4a2 2 0 0 0-1.92-1.43H8.12A2 2 0 0 0 6.2 7L5 11Zm-.5 2A2.5 2.5 0 0 0 2 15.5V18a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h14v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2.5A2.5 2.5 0 0 0 19.5 13h-15ZM6.5 15A1.5 1.5 0 1 1 5 13.5 1.5 1.5 0 0 1 6.5 15Zm13 0a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5Z"/></svg><span id="metaBody">Hatchback</span></div>
+                  <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M7 4h2v7H7zM15 4h2v7h-2zM11 3h2v9h-2zM4 16l3-1 2 3 2-6 2 7 2-4 2 2 3-1v3H4z"/></svg><span id="metaTransmission">Automatic</span></div>
+                  <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M7 2h10v2h1a2 2 0 0 1 2 2v14h-4v-6H8v6H4V6a2 2 0 0 1 2-2h1V2Zm2 2v2h6V4H9Zm1 11h4V9h-4v6Z"/></svg><span id="metaFuel">Petrol</span></div>
+                  <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M12 1a10 10 0 1 0 10 10A10 10 0 0 0 12 1Zm1 10.41 3.29 3.3-1.41 1.41L11 12V6h2Z"/></svg><span id="metaKms">67,500 km</span></div>
+                  <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2-8 4.5V21h16v-2.5c0-2.5-3.58-4.5-8-4.5Z"/></svg><span id="metaOwners">One Owner</span></div>
+                </div>
+
+                <div class="price-row">
+                  <div class="price" id="vehiclePrice">$18,990</div>
+                  <div class="price-badge" id="priceBadge">DRIVE AWAY</div>
+                </div>
+
+                <div class="enquiry-row">
+                  <a class="btn-call" id="callBtn" href="tel:0412345678"><span>📞</span><span>CALL NOW</span></a>
+                  <a class="btn-text" id="smsBtn" href="sms:0412345678"><span>💬</span><span>TEXT ENQUIRY</span></a>
+                  <a class="btn-email" id="emailBtn" href="mailto:hello@yourcaryard.com.au?subject=Vehicle%20Enquiry"><span>✉️</span><span>EMAIL ENQUIRY</span></a>
+                </div>
+
+                <div class="optional-badges" id="optionalBadges"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="footer-card" id="aboutSection" style="margin-top:18px;">
+            <h2 id="aboutTitle" style="margin:0 0 10px;color:var(--navy);font-size:26px;">ABOUT US</h2>
+            <p id="aboutText" style="margin:0;color:#303d57;font-size:17px;line-height:1.5;">Family-friendly local car yard with simple enquiries and quality used vehicles.</p>
+          </div>
+
+          <div class="footer-card">
+            <div class="footer-grid">
+              <div class="footer-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 10a3 3 0 1 1 3-3 3 3 0 0 1-3 3Z"/></svg>
+                <div><h4 id="footerBizName">Your Car Yard</h4><p id="footerAddress">123 Main Road, Smithfield NSW 2164</p></div>
+              </div>
+              <div class="footer-item">
+                <svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm1 11.41 4.29 4.3-1.41 1.41L11 13V6h2Z"/></svg>
+                <div><h4>Opening Hours</h4><div id="footerHours">Mon - Fri: 9:00am - 5:30pm<br>Sat: 9:00am - 1:00pm</div></div>
+              </div>
+              <div class="footer-item">
+                <svg viewBox="0 0 24 24"><path d="m12 1 8 3v6c0 5-3.4 9.74-8 11-4.6-1.26-8-6-8-11V4Zm0 5.2L8.6 9.6l1.41 1.41L11 10l2.99 2.99L17.4 9.6Z"/></svg>
+                <div><h4>Quality &amp; Trust</h4><div id="footerTrust">All cars inspected. Clear history.<br>Drive away with confidence.</div></div>
+              </div>
+              <div class="footer-item copy">
+                <div><h4 style="margin-bottom:12px">&copy; <span id="yearNow"></span> Your Car Yard. All rights reserved.</h4><div>Privacy Policy &nbsp;&nbsp;|&nbsp;&nbsp; Terms &amp; Conditions</div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="adminView" class="admin-panel hidden">
+      <h2>Admin Panel</h2>
+      <p style="margin-top:0;color:#61708b">Update the business details and vehicle information below. This version saves on the same browser/device.</p>
+
+      <div class="section-title">Business Details</div>
+      <div class="inline-grid">
+        <div class="field"><label>Business Name</label><input id="bizNameInput" value="Your Car Yard"></div>
+        <div class="field"><label>Tagline</label><input id="taglineInput" value="Affordable cars. Easy buying."></div>
+        <div class="field"><label>Phone Number</label><input id="phoneInput" value="0412 345 678"></div>
+        <div class="field"><label>SMS Number</label><input id="smsInput" value="0412345678"></div>
+        <div class="field"><label>Email Address</label><input id="emailInput" value="hello@yourcaryard.com.au"></div>
+        <div class="field"><label>Street Address</label><input id="addressInput" value="123 Main Road, Smithfield NSW 2164"></div>
+      </div>
+      <div class="check-row"><input type="checkbox" id="showAboutInput" checked><label for="showAboutInput" style="margin:0">Show About Us button and section</label></div>
+      <div class="inline-grid">
+        <div class="field"><label>About Us Button Text</label><input id="aboutLabelInput" value="ABOUT US"></div>
+        <div class="field"><label>About Us Text</label><textarea id="aboutTextInput">Family-friendly local car yard with simple enquiries and quality used vehicles.</textarea></div>
+      </div>
+      <div class="inline-grid">
+        <div class="field"><label>Opening Hours</label><textarea id="hoursInput">Mon - Fri: 9:00am - 5:30pm
+Sat: 9:00am - 1:00pm</textarea></div>
+        <div class="field"><label>Quality/Trust Text</label><textarea id="trustInput">All cars inspected. Clear history.
+Drive away with confidence.</textarea></div>
+      </div>
+
+      <div class="section-title">Vehicle Details</div>
+      <div class="inline-grid">
+        <div class="field"><label>Vehicle Title</label><input id="titleInput" value="2018 Volkswagen Golf 110TSI"></div>
+        <div class="field"><label>Price</label><input id="priceInput" value="$18,990"></div>
+        <div class="field"><label>Make</label><input id="makeInput" value="Volkswagen"></div>
+        <div class="field"><label>Model</label><input id="modelInput" value="Golf"></div>
+        <div class="field"><label>Year</label><input id="yearInput" value="2018"></div>
+        <div class="field"><label>Colour</label><input id="colourInput" value="Blue"></div>
+        <div class="field"><label>Body Type</label><input id="bodyInput" value="Hatchback"></div>
+        <div class="field"><label>Transmission</label><input id="transInput" value="Automatic"></div>
+        <div class="field"><label>Fuel Type</label><input id="fuelInput" value="Petrol"></div>
+        <div class="field"><label>Kilometres</label><input id="kmsInput" value="67,500 km"></div>
+        <div class="field"><label>Owner Summary</label><input id="ownersInput" value="One Owner"></div>
+        <div class="field"><label>Price Label</label>
+          <select id="priceLabelInput">
+            <option>DRIVE AWAY</option>
+            <option>NEGOTIABLE</option>
+            <option>FINANCE AVAILABLE</option>
+            <option>TRADE-INS WELCOME</option>
+            <option>ONO</option>
+          </select>
+        </div>
+        <div class="field"><label>Status</label>
+          <select id="statusInput">
+            <option>Available</option>
+            <option>Sold</option>
+            <option>Coming Soon</option>
+          </select>
+        </div>
+      </div>
+      <div class="check-row"><input type="checkbox" id="featuredInput" checked><label for="featuredInput" style="margin:0">Featured Vehicle</label></div>
+
+      <div class="section-title">Optional Vehicle Highlights</div>
+      <div class="inline-grid">
+        <div>
+          <div class="check-row"><input type="checkbox" id="showService"><label for="showService" style="margin:0">Show Service History</label></div>
+          <div class="field"><label>Service History</label><select id="serviceInput"><option>Full Service History</option><option>Partial Service History</option><option>No History Provided</option></select></div>
+        </div>
+        <div>
+          <div class="check-row"><input type="checkbox" id="showRoadworthy"><label for="showRoadworthy" style="margin:0">Show Roadworthy</label></div>
+          <div class="field"><label>Roadworthy</label><select id="roadworthyInput"><option>Roadworthy Included</option><option>Roadworthy Available</option><option>Sold As Is</option></select></div>
+        </div>
+      </div>
+      <div class="inline-grid">
+        <div>
+          <div class="check-row"><input type="checkbox" id="showWarranty"><label for="showWarranty" style="margin:0">Show Warranty</label></div>
+          <div class="field"><label>Warranty</label><select id="warrantyInput"><option>Warranty Included</option><option>Extended Warranty Available</option><option>No Warranty</option></select></div>
+        </div>
+      </div>
+
+      <div class="section-title">Enquiry Settings</div>
+      <div class="inline-grid">
+        <div class="field"><label>Call Button Number</label><input id="callNumberInput" value="0412345678"></div>
+        <div class="field"><label>Text Button Number</label><input id="textNumberInput" value="0412345678"></div>
+        <div>
+          <div class="check-row"><input type="checkbox" id="showEmailInput" checked><label for="showEmailInput" style="margin:0">Show Email Button in Header and Enquiry Area</label></div>
+          <div class="field"><label>Email Enquiry Address</label><input id="emailEnquiryInput" value="hello@yourcaryard.com.au"></div>
+        </div>
+      </div>
+
+      <div class="section-title">Vehicle Images</div>
+      <div class="field"><label>Main Vehicle Image</label><input type="file" id="mainFile" accept="image/*"></div>
+      <div class="inline-grid">
+        <div class="field"><label>View 1</label><input type="file" class="thumb-file" data-index="0" accept="image/*"></div>
+        <div class="field"><label>View 2</label><input type="file" class="thumb-file" data-index="1" accept="image/*"></div>
+        <div class="field"><label>View 3</label><input type="file" class="thumb-file" data-index="2" accept="image/*"></div>
+        <div class="field"><label>View 4</label><input type="file" class="thumb-file" data-index="3" accept="image/*"></div>
+        <div class="field"><label>View 5</label><input type="file" class="thumb-file" data-index="4" accept="image/*"></div>
+        <div class="field"><label>View 6</label><input type="file" class="thumb-file" data-index="5" accept="image/*"></div>
+      </div>
+
+      <div class="form-actions">
+        <button class="primary-btn" id="saveBtn" type="button">Save Changes</button>
+        <button class="secondary-btn" id="resetBtn" type="button">Reset Demo Data</button>
+      </div>
+
+      <div class="section-title">Current Stock</div>
+      <div class="stock-list">
+        <div class="stock-item"><div><strong id="stockTitle">2018 Volkswagen Golf 110TSI</strong><span id="stockMeta">$18,990 • Available</span></div><div class="stock-actions"><button class="secondary-btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Edit Above</button></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pin-modal" id="pinModal">
+    <div class="modal-card">
+      <h3>Admin Access</h3>
+      <p>Enter the admin PIN to open the admin panel.</p>
+      <div class="field"><label>PIN</label><input id="pinInput" type="password" placeholder="Enter PIN"></div>
+      <div class="form-actions">
+        <button class="primary-btn" id="pinSubmit" type="button">Open Admin</button>
+        <button class="secondary-btn" id="pinCancel" type="button">Cancel</button>
+      </div>
+      <p id="pinMsg" style="color:#c43e2c;margin-top:8px"></p>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'yourCarYardCloserMockup';
+    const defaultData = {
+      adminPin: '1234',
+      business: {
+        name: 'Your Car Yard',
+        tagline: 'Affordable cars. Easy buying.',
+        phone: '0412 345 678',
+        sms: '0412345678',
+        email: 'hello@yourcaryard.com.au',
+        address: '123 Main Road, Smithfield NSW 2164',
+        hours: 'Mon - Fri: 9:00am - 5:30pm\nSat: 9:00am - 1:00pm',
+        trust: 'All cars inspected. Clear history.\nDrive away with confidence.',
+        showAbout: true,
+        aboutLabel: 'ABOUT US',
+        aboutText: 'Family-friendly local car yard with simple enquiries and quality used vehicles.'
+      },
+      car: {
+        title: '2018 Volkswagen Golf 110TSI',
+        make: 'Volkswagen',
+        model: 'Golf',
+        year: '2018',
+        colour: 'Blue',
+        body: 'Hatchback',
+        transmission: 'Automatic',
+        fuel: 'Petrol',
+        kms: '67,500 km',
+        owners: 'One Owner',
+        price: '$18,990',
+        priceLabel: 'DRIVE AWAY',
+        status: 'Available',
+        featured: true,
+        showService: false,
+        service: 'Full Service History',
+        showRoadworthy: false,
+        roadworthy: 'Roadworthy Included',
+        showWarranty: false,
+        warranty: 'Warranty Included'
+      },
+      enquiry: {
+        call: '0412345678',
+        text: '0412345678',
+        email: 'hello@yourcaryard.com.au',
+        showEmail: true
+      },
+      images: {
+        main: '',
+        thumbs: ['', '', '', '', '', '']
+      }
+    };
+
+
+    const MAKE_MODEL_DATABASE = {
+      "Abarth": ["124 Spider", "500", "595", "695"],
+      "Alfa Romeo": ["Giulia", "Giulietta", "Stelvio", "Tonale"],
+      "Audi": ["A1", "A3", "A4", "A5", "A6", "A7", "A8", "Q2", "Q3", "Q5", "Q7", "Q8", "RS3", "RS4", "RS5", "RS6", "SQ5", "TT", "e-tron"],
+      "BMW": ["1 Series", "2 Series", "3 Series", "4 Series", "5 Series", "7 Series", "8 Series", "i3", "i4", "iX", "iX1", "iX3", "M2", "M3", "M4", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "Z4"],
+      "BYD": ["Atto 3", "Dolphin", "Seal", "Sealion 6", "Shark 6"],
+      "Chery": ["Omoda 5", "Tiggo 4", "Tiggo 7 Pro", "Tiggo 8 Pro Max"],
+      "Chevrolet": ["Camaro", "Corvette", "Silverado"],
+      "Citroen": ["C3", "C4", "C5 Aircross", "Berlingo"],
+      "Cupra": ["Ateca", "Born", "Formentor", "Leon", "Tavascan", "Terramar"],
+      "Fiat": ["500", "500e", "500X", "Ducato"],
+      "Ford": ["Everest", "Escape", "Focus", "Mustang", "Puma", "Ranger", "Tourneo", "Transit"],
+      "Genesis": ["G70", "G80", "GV60", "GV70", "GV80"],
+      "GWM": ["Cannon", "Haval H6", "Haval Jolion", "Ora", "Tank 300", "Tank 500"],
+      "Haval": ["H6", "H6GT", "Jolion"],
+      "Honda": ["Accord", "Civic", "CR-V", "HR-V", "Jazz", "Odyssey", "ZR-V"],
+      "Hyundai": ["Accent", "Elantra", "i20", "i30", "Ioniq", "Ioniq 5", "Ioniq 6", "Kona", "Palisade", "Santa Fe", "Sonata", "Staria", "Tucson", "Venue"],
+      "Isuzu": ["D-MAX", "MU-X"],
+      "Jaecoo": ["J7"],
+      "Jaguar": ["E-Pace", "F-Pace", "F-Type", "I-Pace", "XE", "XF"],
+      "Jeep": ["Avenger", "Cherokee", "Compass", "Gladiator", "Grand Cherokee", "Renegade", "Wrangler"],
+      "KGM": ["Korando", "Musso", "Rexton", "Torres"],
+      "Kia": ["Carnival", "Cerato", "EV3", "EV5", "EV6", "EV9", "K4", "Niro", "Picanto", "Rio", "Seltos", "Sorento", "Sportage", "Stinger", "Stonic"],
+      "Land Rover": ["Defender", "Discovery", "Discovery Sport", "Range Rover", "Range Rover Evoque", "Range Rover Sport", "Range Rover Velar"],
+      "LDV": ["Deliver 9", "D90", "eDeliver 7", "G10", "Mifa", "T60", "V80"],
+      "Lexus": ["ES", "GX", "IS", "LBX", "LC", "LM", "LS", "LX", "NX", "RC", "RX", "RZ", "UX"],
+      "Mazda": ["2", "3", "6", "BT-50", "CX-3", "CX-30", "CX-5", "CX-60", "CX-70", "CX-8", "CX-9", "CX-90", "MX-30", "MX-5"],
+      "Mercedes-Benz": ["A-Class", "B-Class", "C-Class", "CLA", "CLS", "E-Class", "EQB", "EQC", "EQE", "EQS", "G-Class", "GLA", "GLB", "GLC", "GLE", "GLS", "S-Class", "Sprinter", "V-Class", "X-Class"],
+      "MG": ["3", "4", "5", "HS", "MG3", "MG4", "MG5", "ZS", "ZS EV"],
+      "Mini": ["Clubman", "Convertible", "Cooper", "Countryman", "Hatch"],
+      "Mitsubishi": ["ASX", "Eclipse Cross", "Express", "Lancer", "Mirage", "Outlander", "Pajero", "Pajero Sport", "Triton"],
+      "Nissan": ["370Z", "Juke", "Leaf", "Navara", "Pathfinder", "Patrol", "Qashqai", "X-Trail", "Z"],
+      "Peugeot": ["2008", "208", "3008", "308", "5008", "508", "Expert", "Partner"],
+      "Polestar": ["2", "3", "4"],
+      "Porsche": ["718", "911", "Cayenne", "Macan", "Panamera", "Taycan"],
+      "Ram": ["1500", "2500", "3500"],
+      "Renault": ["Arkana", "Captur", "Clio", "Duster", "Kangoo", "Koleos", "Megane", "Trafic"],
+      "Skoda": ["Fabia", "Kamiq", "Karoq", "Kodiaq", "Octavia", "Scala", "Superb"],
+      "Subaru": ["BRZ", "Crosstrek", "Forester", "Impreza", "Liberty", "Outback", "Solterra", "WRX", "XV"],
+      "Suzuki": ["Baleno", "Ignis", "Jimny", "S-Cross", "Swift", "Vitara"],
+      "Tesla": ["Model 3", "Model S", "Model X", "Model Y"],
+      "Toyota": ["86", "Camry", "C-HR", "Corolla", "Fortuner", "GR Corolla", "GR Supra", "HiAce", "HiLux", "Kluger", "LandCruiser", "Prado", "RAV4", "Yaris", "Yaris Cross"],
+      "Volkswagen": ["Amarok", "Arteon", "Caddy", "Crafter", "Golf", "ID.3", "ID.4", "ID.5", "Multivan", "Passat", "Polo", "T-Cross", "T-Roc", "Tiguan", "Touareg", "Transporter"],
+      "Volvo": ["C40", "EX30", "EX40", "EX90", "S60", "S90", "V60", "V90", "XC40", "XC60", "XC90"]
+    };
+
+    let state = loadState();
+    let currentMainIndex = -1;
+
+    function loadState(){
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if(saved) return deepMerge(structuredClone(defaultData), saved);
+      } catch(e){}
+      return structuredClone(defaultData);
+    }
+    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    function deepMerge(target, source){
+      for(const key in source){
+        if(source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) target[key] = deepMerge(target[key] || {}, source[key]);
+        else target[key] = source[key];
+      }
+      return target;
+    }
+
+    function svgPlaceholder(label, bg='#edf1f8', fg='#678'){
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="${bg}"/><text x="50%" y="48%" text-anchor="middle" font-family="Arial" font-size="42" fill="${fg}">Your Car Yard</text><text x="50%" y="57%" text-anchor="middle" font-family="Arial" font-size="28" fill="${fg}">${label}</text></svg>`);
+    }
+    function cleanPhone(num){ return String(num || '').replace(/[^\d+]/g,''); }
+
+    function render(){
+      const {business, car, enquiry, images} = state;
+      document.getElementById('bizName').textContent = business.name;
+      document.getElementById('tagline').textContent = business.tagline;
+      document.getElementById('phoneDisplay').textContent = business.phone;
+      document.getElementById('footerBizName').textContent = business.name;
+      document.getElementById('footerAddress').textContent = business.address;
+      document.getElementById('footerHours').innerHTML = business.hours.replace(/\n/g,'<br>');
+      document.getElementById('footerTrust').innerHTML = business.trust.replace(/\n/g,'<br>');
+      document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+      const aboutNav = document.getElementById('aboutNavBtn');
+      const aboutSection = document.getElementById('aboutSection');
+      document.getElementById('aboutTitle').textContent = business.aboutLabel || 'ABOUT US';
+      document.getElementById('aboutText').textContent = business.aboutText || '';
+      aboutNav.textContent = business.aboutLabel || 'ABOUT US';
+      aboutNav.classList.toggle('hidden', !business.showAbout);
+      aboutSection.classList.toggle('hidden', !business.showAbout);
+
+      const callHref = 'tel:' + cleanPhone(enquiry.call || business.phone);
+      const smsHref = 'sms:' + cleanPhone(enquiry.text || business.sms);
+      const mailHref = 'mailto:' + (enquiry.email || business.email) + '?subject=' + encodeURIComponent('Vehicle Enquiry - ' + car.title);
+      document.getElementById('callQuick').href = callHref;
+      document.getElementById('smsQuick').href = smsHref;
+      document.getElementById('emailQuick').href = 'mailto:' + (enquiry.email || business.email);
+      document.getElementById('enquireTop').href = callHref;
+      document.getElementById('callBtn').href = callHref;
+      document.getElementById('smsBtn').href = smsHref;
+      document.getElementById('emailBtn').href = mailHref;
+
+      const showEmail = enquiry.showEmail !== false;
+      document.getElementById('emailBtn').classList.toggle('hidden', !showEmail);
+      document.getElementById('emailQuick').classList.toggle('hidden', !showEmail);
+
+      document.getElementById('vehicleTitle').textContent = car.title;
+      document.getElementById('metaBody').textContent = car.body;
+      document.getElementById('metaTransmission').textContent = car.transmission;
+      document.getElementById('metaFuel').textContent = car.fuel;
+      document.getElementById('metaKms').textContent = car.kms;
+      document.getElementById('metaOwners').textContent = car.owners;
+      document.getElementById('vehiclePrice').textContent = car.price;
+      document.getElementById('priceBadge').textContent = car.priceLabel;
+      document.getElementById('featuredRibbon').classList.toggle('hidden', !car.featured);
+
+      let mainSrc = images.main || svgPlaceholder('Main Vehicle Image');
+      if(currentMainIndex >= 0 && images.thumbs[currentMainIndex]) mainSrc = images.thumbs[currentMainIndex];
+      document.getElementById('mainImage').src = mainSrc;
+
+      const thumbs = document.getElementById('thumbs');
+      thumbs.innerHTML = '';
+      images.thumbs.forEach((src, idx) => {
+        const wrap = document.createElement('button');
+        wrap.type = 'button';
+        wrap.className = 'thumb' + (currentMainIndex === idx ? ' active' : '');
+        wrap.innerHTML = `<img src="${src || svgPlaceholder('View ' + (idx+1),'#eef1f7','#8a97ad')}" alt="Vehicle view ${idx+1}">`;
+        wrap.addEventListener('click', () => { currentMainIndex = idx; render(); });
+        thumbs.appendChild(wrap);
+      });
+
+      const badges = document.getElementById('optionalBadges');
+      const items = [];
+      if(car.showService) items.push(car.service);
+      if(car.showRoadworthy) items.push(car.roadworthy);
+      if(car.showWarranty) items.push(car.warranty);
+      badges.innerHTML = items.map(v => `<div class="mini">${v}</div>`).join('');
+
+      document.getElementById('stockTitle').textContent = car.title;
+      document.getElementById('stockMeta').textContent = `${car.price} • ${car.status}`;
+
+      populateAdmin();
+      populateFilters();
+    }
+
+    function populateAdmin(){
+      const {business, car, enquiry} = state;
+      setVal('bizNameInput', business.name); setVal('taglineInput', business.tagline); setVal('phoneInput', business.phone); setVal('smsInput', business.sms); setVal('emailInput', business.email); setVal('addressInput', business.address); setVal('hoursInput', business.hours); setVal('trustInput', business.trust); setChecked('showAboutInput', business.showAbout); setVal('aboutLabelInput', business.aboutLabel || 'ABOUT US'); setVal('aboutTextInput', business.aboutText || '');
+      setVal('titleInput', car.title); setVal('priceInput', car.price); setVal('makeInput', car.make); setVal('modelInput', car.model); setVal('yearInput', car.year); setVal('colourInput', car.colour); setVal('bodyInput', car.body); setVal('transInput', car.transmission); setVal('fuelInput', car.fuel); setVal('kmsInput', car.kms); setVal('ownersInput', car.owners);
+      setVal('priceLabelInput', car.priceLabel); setVal('statusInput', car.status); setChecked('featuredInput', car.featured); setChecked('showService', car.showService); setVal('serviceInput', car.service); setChecked('showRoadworthy', car.showRoadworthy); setVal('roadworthyInput', car.roadworthy); setChecked('showWarranty', car.showWarranty); setVal('warrantyInput', car.warranty);
+      setVal('callNumberInput', enquiry.call); setVal('textNumberInput', enquiry.text); setVal('emailEnquiryInput', enquiry.email); setChecked('showEmailInput', enquiry.showEmail !== false);
+    }
+    function setVal(id, v){ const el = document.getElementById(id); if(el) el.value = v ?? ''; }
+    function setChecked(id, v){ const el = document.getElementById(id); if(el) el.checked = !!v; }
+
+    function populateFilters(){
+      const makeEl = document.getElementById('filterMake');
+      const selectedMake = makeEl ? makeEl.value : '';
+      const allMakes = Object.keys(MAKE_MODEL_DATABASE).sort();
+      const allModels = selectedMake && MAKE_MODEL_DATABASE[selectedMake]
+        ? MAKE_MODEL_DATABASE[selectedMake]
+        : Object.values(MAKE_MODEL_DATABASE).flat();
+
+      fillSelect('filterMake', allMakes, 'All Makes');
+      if (selectedMake && [...document.getElementById('filterMake').options].some(opt => opt.value === selectedMake)) {
+        document.getElementById('filterMake').value = selectedMake;
+      }
+
+      fillSelect('filterModel', [...new Set(allModels)].sort(), selectedMake ? `All ${selectedMake} Models` : 'All Models');
+      fillSelect('filterBody', ['Convertible', 'Coupe', 'Hatchback', 'People Mover', 'Sedan', 'SUV', 'Ute', 'Van', 'Wagon'], 'All Types');
+      fillSelect('filterFuel', ['Diesel', 'Electric', 'Hybrid', 'Petrol', 'Plug-in Hybrid'], 'All Fuel Types');
+    }
+    function fillSelect(id, values, defaultLabel){
+      const el = document.getElementById(id);
+      const current = el.value;
+      el.innerHTML = `<option value="">${defaultLabel}</option>` + [...new Set(values.filter(Boolean))].map(v => `<option value="${v}">${v}</option>`).join('');
+      if ([...el.options].some(opt => opt.value === current)) el.value = current;
+    }
+
+    function saveFromAdmin(){
+      state.business = {
+        name: getVal('bizNameInput'), tagline: getVal('taglineInput'), phone: getVal('phoneInput'), sms: getVal('smsInput'), email: getVal('emailInput'), address: getVal('addressInput'), hours: getVal('hoursInput'), trust: getVal('trustInput'), showAbout: getChecked('showAboutInput'), aboutLabel: getVal('aboutLabelInput'), aboutText: getVal('aboutTextInput')
+      };
+      state.car = {
+        title: getVal('titleInput'), price: getVal('priceInput'), make: getVal('makeInput'), model: getVal('modelInput'), year: getVal('yearInput'), colour: getVal('colourInput'), body: getVal('bodyInput'), transmission: getVal('transInput'), fuel: getVal('fuelInput'), kms: getVal('kmsInput'), owners: getVal('ownersInput'), priceLabel: getVal('priceLabelInput'), status: getVal('statusInput'), featured: getChecked('featuredInput'), showService: getChecked('showService'), service: getVal('serviceInput'), showRoadworthy: getChecked('showRoadworthy'), roadworthy: getVal('roadworthyInput'), showWarranty: getChecked('showWarranty'), warranty: getVal('warrantyInput')
+      };
+      state.enquiry = { call: getVal('callNumberInput'), text: getVal('textNumberInput'), email: getVal('emailEnquiryInput'), showEmail: getChecked('showEmailInput') };
+      saveState();
+      render();
+      alert('Changes saved.');
+    }
+    function getVal(id){ return document.getElementById(id).value; }
+    function getChecked(id){ return document.getElementById(id).checked; }
+
+    function readImage(input, cb){
+      const file = input.files && input.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = e => cb(e.target.result);
+      reader.readAsDataURL(file);
+    }
+
+    document.getElementById('mainFile').addEventListener('change', function(){
+      readImage(this, data => { state.images.main = data; currentMainIndex = -1; saveState(); render(); });
+    });
+    document.querySelectorAll('.thumb-file').forEach(inp => inp.addEventListener('change', function(){
+      const idx = Number(this.dataset.index);
+      readImage(this, data => { state.images.thumbs[idx] = data; currentMainIndex = idx; saveState(); render(); });
+    }));
+
+    document.getElementById('saveBtn').addEventListener('click', saveFromAdmin);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if(confirm('Reset the demo data?')){ state = structuredClone(defaultData); currentMainIndex = -1; saveState(); render(); }
+    });
+
+    document.getElementById('adminButton').addEventListener('click', () => {
+      document.getElementById('pinModal').style.display = 'flex';
+      document.getElementById('pinInput').value = '';
+      document.getElementById('pinMsg').textContent = '';
+      setTimeout(() => document.getElementById('pinInput').focus(), 50);
+    });
+    document.getElementById('pinCancel').addEventListener('click', () => document.getElementById('pinModal').style.display = 'none');
+    document.getElementById('pinSubmit').addEventListener('click', () => {
+      const pin = document.getElementById('pinInput').value;
+      if(pin === state.adminPin){
+        document.getElementById('pinModal').style.display = 'none';
+        document.getElementById('adminView').classList.toggle('hidden');
+        if(!document.getElementById('adminView').classList.contains('hidden')) document.getElementById('adminView').scrollIntoView({behavior:'smooth'});
+      } else document.getElementById('pinMsg').textContent = 'Incorrect PIN';
+    });
+
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    document.getElementById('showAllBtn').addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+      ['filterMake','filterModel','filterBody','filterFuel'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('hideSoldToggle').checked = false;
+      applyFilters();
+    });
+    document.getElementById('filterMake').addEventListener('change', () => { populateFilters(); applyFilters(); });
+    ['filterModel','filterBody','filterFuel','hideSoldToggle'].forEach(id => document.getElementById(id).addEventListener('change', applyFilters));
+
+    function applyFilters(){
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const make = document.getElementById('filterMake').value;
+      const model = document.getElementById('filterModel').value;
+      const body = document.getElementById('filterBody').value;
+      const fuel = document.getElementById('filterFuel').value;
+      const hideSold = document.getElementById('hideSoldToggle').checked;
+      const c = state.car;
+      const hay = [c.title,c.make,c.model,c.year,c.colour,c.body,c.fuel,c.price].join(' ').toLowerCase();
+      const visible = (!q || hay.includes(q)) && (!make || c.make === make) && (!model || c.model === model) && (!body || c.body === body) && (!fuel || c.fuel === fuel) && !(hideSold && c.status === 'Sold');
+      document.querySelector('.vehicle-panel').style.display = visible ? 'block' : 'none';
+      document.getElementById('aboutSection').style.display = (visible && state.business.showAbout) ? 'block' : 'none';
+      document.querySelectorAll('.footer-card')[1].style.display = visible ? 'block' : 'none';
+    }
+
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const text = `${state.car.title} - ${state.car.price}`;
+      if(navigator.share){
+        try { await navigator.share({title: state.car.title, text}); } catch(e){}
+      } else if(navigator.clipboard){
+        await navigator.clipboard.writeText(text);
+        alert('Vehicle details copied to clipboard.');
+      }
+    });
+
+    render();
+    applyFilters();
+  </script>
+</body>
+</html>
