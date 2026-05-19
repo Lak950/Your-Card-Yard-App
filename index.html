@@ -1106,12 +1106,14 @@
     </section>
   </main>
 
-<script type="module">
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 const SUPABASE_URL = "https://jbakjwufspxnhvqsjqec.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_L2a9KE04GRAr9jWD-b3xeQ_Em16lCaX";
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+if(!window.supabase){
+  alert("Supabase did not load. Please refresh the page. If this continues, the Supabase script may be blocked.");
+}
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const MAKES = {
   Toyota:["86","Camry","Corolla","HiLux","Kluger","LandCruiser","Prado","RAV4","Yaris","Yaris Cross"],
@@ -1205,7 +1207,7 @@ window.clearFilters=function(){
 };
 
 async function loadSession(){
-  const {data}=await supabase.auth.getSession();
+  const {data}=await supabaseClient.auth.getSession();
   currentUser=data.session?.user||null;
   if(currentUser) await loadProfile();
   updateTopButton();
@@ -1217,7 +1219,7 @@ function updateTopButton(){
 
 async function loadProfile(){
   if(!currentUser) return;
-  const {data,error}=await supabase.from("profiles").select("*").eq("user_id",currentUser.id).maybeSingle();
+  const {data,error}=await supabaseClient.from("profiles").select("*").eq("user_id",currentUser.id).maybeSingle();
   if(error){console.error(error);return}
   currentProfile=data||null;
   if(currentProfile) fillProfileForm();
@@ -1256,15 +1258,43 @@ window.signUp=async function(){
   hideNotice("authNotice");
   const email=$("signupEmail").value.trim();
   const password=$("signupPassword").value;
-  const {error}=await supabase.auth.signUp({email,password});
-  if(error){showNotice("authNotice",error.message,true);return}
-  showNotice("authNotice","Account created. Check your email to confirm your sign up.");
+
+  if(!email || !password){
+    showNotice("authNotice","Please enter an email address and password.",true);
+    return;
+  }
+
+  if(password.length < 6){
+    showNotice("authNotice","Password must be at least 6 characters.",true);
+    return;
+  }
+
+  showNotice("authNotice","Creating account...");
+
+  try{
+    const {data,error}=await supabaseClient.auth.signUp({
+      email,
+      password,
+      options:{
+        emailRedirectTo: window.location.origin + window.location.pathname
+      }
+    });
+
+    if(error){
+      showNotice("authNotice",error.message,true);
+      return;
+    }
+
+    showNotice("authNotice","Account created. Please check your email, including junk/spam, to confirm your sign up.");
+  }catch(err){
+    showNotice("authNotice","Could not contact Supabase. Check your internet connection and try again. " + err.message,true);
+  }
 };
 window.login=async function(){
   hideNotice("authNotice");
   const email=$("loginEmail").value.trim();
   const password=$("loginPassword").value;
-  const {data,error}=await supabase.auth.signInWithPassword({email,password});
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
   if(error){showNotice("authNotice",error.message,true);return}
   currentUser=data.user;
   await loadProfile();
@@ -1273,7 +1303,7 @@ window.login=async function(){
   showNotice("dashboardNotice","Logged in successfully.");
 };
 window.logout=async function(){
-  await supabase.auth.signOut();
+  await supabaseClient.auth.signOut();
   currentUser=null;currentProfile=null;myVehicles=[];
   updateTopButton();
   renderDashboardState();
@@ -1300,7 +1330,7 @@ window.saveProfile=async function(){
     show_email:$("showEmailToggle").checked,
     is_active:true
   };
-  const {data,error}=await supabase.from("profiles").upsert(payload,{onConflict:"user_id"}).select().single();
+  const {data,error}=await supabaseClient.from("profiles").upsert(payload,{onConflict:"user_id"}).select().single();
   if(error){showNotice("dashboardNotice",error.message,true);return}
   currentProfile=data;
   fillProfileForm();
@@ -1312,10 +1342,10 @@ async function uploadVehicleFile(file,vehicleId,sortOrder,isMain=false){
   if(!file) return;
   const ext=(file.name.split(".").pop()||"jpg").toLowerCase();
   const path=`${currentUser.id}/${vehicleId}/${Date.now()}-${sortOrder}.${ext}`;
-  const {error:upErr}=await supabase.storage.from("vehicle-images").upload(path,file,{upsert:false});
+  const {error:upErr}=await supabaseClient.storage.from("vehicle-images").upload(path,file,{upsert:false});
   if(upErr) throw upErr;
-  const {data}=supabase.storage.from("vehicle-images").getPublicUrl(path);
-  const {error}=await supabase.from("vehicle_images").insert({vehicle_id:vehicleId,image_url:data.publicUrl,storage_path:path,sort_order:sortOrder,is_main:isMain});
+  const {data}=supabaseClient.storage.from("vehicle-images").getPublicUrl(path);
+  const {error}=await supabaseClient.from("vehicle_images").insert({vehicle_id:vehicleId,image_url:data.publicUrl,storage_path:path,sort_order:sortOrder,is_main:isMain});
   if(error) throw error;
 }
 
@@ -1349,8 +1379,8 @@ window.saveVehicle=async function(){
     warranty:$("vWarranty").value.trim()
   };
   const result=editingId
-    ? await supabase.from("vehicles").update(payload).eq("id",editingId).select().single()
-    : await supabase.from("vehicles").insert(payload).select().single();
+    ? await supabaseClient.from("vehicles").update(payload).eq("id",editingId).select().single()
+    : await supabaseClient.from("vehicles").insert(payload).select().single();
   if(result.error){showNotice("dashboardNotice",result.error.message,true);return}
   const vehicleId=result.data.id;
   try{
@@ -1379,13 +1409,13 @@ window.clearVehicleForm=function(){
 };
 
 async function loadImagesForVehicle(vehicleId){
-  const {data}=await supabase.from("vehicle_images").select("*").eq("vehicle_id",vehicleId).order("is_main",{ascending:false}).order("sort_order");
+  const {data}=await supabaseClient.from("vehicle_images").select("*").eq("vehicle_id",vehicleId).order("is_main",{ascending:false}).order("sort_order");
   return data||[];
 }
 
 async function loadMyVehicles(){
   if(!currentProfile){myVehicles=[];renderMyVehicles();updateStats();return}
-  const {data,error}=await supabase.from("vehicles").select("*").eq("seller_id",currentProfile.id).order("created_at",{ascending:false});
+  const {data,error}=await supabaseClient.from("vehicles").select("*").eq("seller_id",currentProfile.id).order("created_at",{ascending:false});
   if(error){showNotice("dashboardNotice",error.message,true);return}
   myVehicles=data||[];
   renderMyVehicles();
@@ -1437,7 +1467,7 @@ window.editVehicle=function(v){
 };
 window.deleteVehicle=async function(vehicleId){
   if(!confirm("Delete this vehicle?")) return;
-  const {error}=await supabase.from("vehicles").delete().eq("id",vehicleId);
+  const {error}=await supabaseClient.from("vehicles").delete().eq("id",vehicleId);
   if(error){showNotice("dashboardNotice",error.message,true);return}
   showNotice("dashboardNotice","Vehicle deleted.");
   await loadMyVehicles();
@@ -1445,7 +1475,7 @@ window.deleteVehicle=async function(vehicleId){
 };
 
 async function loadMarketplaceVehicles(){
-  const {data,error}=await supabase.from("public_vehicle_listings").select("*").order("featured",{ascending:false}).order("created_at",{ascending:false});
+  const {data,error}=await supabaseClient.from("public_vehicle_listings").select("*").order("featured",{ascending:false}).order("created_at",{ascending:false});
   if(error){showNotice("homeNotice",error.message,true);return}
   marketplaceVehicles=data||[];
   await renderMarketplace();
@@ -1514,14 +1544,14 @@ window.shareCurrentPage=async function(){
 };
 
 async function loadSellerYard(slug){
-  const {data:seller,error}=await supabase.from("profiles").select("*").eq("slug",slug).maybeSingle();
+  const {data:seller,error}=await supabaseClient.from("profiles").select("*").eq("slug",slug).maybeSingle();
   if(error||!seller){showView("home");showNotice("homeNotice","Seller yard not found.",true);return}
   $("publicSellerName").textContent=seller.yard_name||"Seller Yard";
   $("publicSellerLocation").textContent=[seller.suburb,seller.state].filter(Boolean).join(", ");
   $("publicSellerAbout").textContent=seller.about||"Local seller with quality vehicles.";
   $("sellerCallBtn").href=seller.phone?`tel:${cleanPhone(seller.phone)}`:"#";
   $("sellerTextBtn").href=seller.sms?`sms:${cleanPhone(seller.sms)}`:(seller.phone?`sms:${cleanPhone(seller.phone)}`:"#");
-  const {data:vehicles,error:vehicleError}=await supabase.from("public_vehicle_listings").select("*").eq("seller_slug",slug).order("featured",{ascending:false}).order("created_at",{ascending:false});
+  const {data:vehicles,error:vehicleError}=await supabaseClient.from("public_vehicle_listings").select("*").eq("seller_slug",slug).order("featured",{ascending:false}).order("created_at",{ascending:false});
   if(vehicleError){showView("home");showNotice("homeNotice",vehicleError.message,true);return}
   $("sellerVehicleHeading").textContent=`Vehicles for Sale (${(vehicles||[]).length})`;
   const grid=$("sellerVehiclesGrid");
