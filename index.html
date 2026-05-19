@@ -807,7 +807,18 @@
       .small-actions{justify-content:flex-start}
       .section-head{align-items:flex-start;flex-direction:column}
     }
-  </style>
+  
+    @media(max-width:640px){
+      .hero-badge{
+        display:none !important;
+      }
+      .hero-visual{
+        min-height:280px !important;
+        background-position:center center !important;
+      }
+    }
+
+</style>
 </head>
 <body>
   <header class="topbar">
