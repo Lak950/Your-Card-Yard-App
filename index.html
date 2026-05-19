@@ -3,784 +3,875 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Car Yard</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 112'%3E%3Cpath fill='%23ff7a00' d='M50 4C28.2 4 10.5 21.6 10.5 43.3c0 28.4 39.5 64.7 39.5 64.7s39.5-36.3 39.5-64.7C89.5 21.6 71.8 4 50 4z'/%3E%3Ccircle fill='%23fff' cx='50' cy='43' r='29'/%3E%3Cpath fill='%2306183a' d='M30.5 48.2l3.5-10.4c1.1-3.2 4.1-5.4 7.5-5.4h17c3.4 0 6.4 2.2 7.5 5.4l3.5 10.4c3.4 1.3 5.8 4.5 5.8 8.3v7.2c0 1.5-1.2 2.7-2.7 2.7h-3.8c-1.5 0-2.7-1.2-2.7-2.7v-2H33.4v2c0 1.5-1.2 2.7-2.7 2.7h-3.8c-1.5 0-2.7-1.2-2.7-2.7v-7.2c0-3.8 2.4-7 6.3-8.3z'/%3E%3Cpath fill='%23fff' d='M39.2 37.2h21.6c1.3 0 2.5.8 2.9 2.1l2.3 7H34l2.3-7c.4-1.3 1.6-2.1 2.9-2.1z'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#071f56" />
+  <title>Your Car Yard | Small Sellers. Simple Online Yards.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 112'%3E%3Cpath fill='%23ff6b00' d='M50 4C28.2 4 10.5 21.6 10.5 43.3c0 28.4 39.5 64.7 39.5 64.7s39.5-36.3 39.5-64.7C89.5 21.6 71.8 4 50 4z'/%3E%3Ccircle fill='%23fff' cx='50' cy='43' r='29'/%3E%3Cpath fill='%23071f56' d='M30.5 48.2l3.5-10.4c1.1-3.2 4.1-5.4 7.5-5.4h17c3.4 0 6.4 2.2 7.5 5.4l3.5 10.4c3.4 1.3 5.8 4.5 5.8 8.3v7.2c0 1.5-1.2 2.7-2.7 2.7h-3.8c-1.5 0-2.7-1.2-2.7-2.7v-2H33.4v2c0 1.5-1.2 2.7-2.7 2.7h-3.8c-1.5 0-2.7-1.2-2.7-2.7v-7.2c0-3.8 2.4-7 6.3-8.3z'/%3E%3Cpath fill='%23fff' d='M39.2 37.2h21.6c1.3 0 2.5.8 2.9 2.1l2.3 7H34l2.3-7c.4-1.3 1.6-2.1 2.9-2.1z'/%3E%3C/svg%3E" />
   <style>
     :root{
       --navy:#071f56;
       --navy-2:#0b2f75;
-      --navy-3:#112c63;
-      --orange:#ff7a00;
-      --orange-2:#ff9332;
-      --page:#f5f7fb;
-      --text:#102041;
-      --muted:#6a768f;
-      --line:#e4eaf3;
-      --white:#ffffff;
-      --green:#2e9f5b;
-      --yellow:#f0ad2f;
-      --red:#d54d4d;
-      --card-shadow:0 10px 28px rgba(12,38,84,.07);
-      --radius:18px;
-      --radius-sm:12px;
+      --navy-3:#102d66;
+      --orange:#ff6b00;
+      --orange-2:#ff8b2a;
+      --cream:#fff7ef;
+      --page:#f4f7fb;
+      --card:#ffffff;
+      --ink:#111c35;
+      --muted:#68758f;
+      --soft:#eef4ff;
+      --line:#dfe7f2;
+      --line-2:#edf1f7;
+      --green:#228b52;
+      --green-soft:#e8f7ef;
+      --yellow:#b7791f;
+      --yellow-soft:#fff5dd;
+      --red:#c43c48;
+      --red-soft:#fdecee;
+      --shadow:0 18px 45px rgba(7,31,86,.10);
+      --shadow-soft:0 8px 25px rgba(7,31,86,.07);
       --max:1320px;
+      --radius:24px;
+      --radius-sm:14px;
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;background:var(--page);color:var(--text)}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,107,0,.09), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(7,31,86,.08), transparent 32%),
+        var(--page);
+      color:var(--ink);
+    }
     a{text-decoration:none;color:inherit}
     button,input,select,textarea{font:inherit}
-    img{max-width:100%;display:block}
+    button{cursor:pointer}
+    img{display:block;max-width:100%}
+    .hidden{display:none!important}
 
-    .hidden{display:none !important}
+    .logo{
+      width:54px;
+      height:62px;
+      flex:0 0 54px;
+      display:grid;
+      place-items:center;
+      filter:drop-shadow(0 8px 12px rgba(255,107,0,.18));
+    }
+    .logo svg{width:100%;height:100%}
+    .pin-fill{fill:var(--orange)}
+    .car-fill{fill:var(--navy)}
+    .white-fill{fill:#fff}
 
-    .app-shell{min-height:100vh}
-    .topbar{
-      background:linear-gradient(180deg,#081d52 0%, #0a2a6f 100%);
-      color:#fff;
-      border-bottom-left-radius:22px;
-      border-bottom-right-radius:22px;
-      box-shadow:0 12px 30px rgba(3,22,66,.18);
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
-    .topbar-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 22px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      flex-wrap:wrap;
-    }
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:12px;
       min-width:0;
     }
-    .logo-badge{
-      width:52px;height:58px;flex:0 0 52px;
-    }
-    .logo-badge svg{width:100%;height:100%}
-    .pin-fill{fill:var(--orange)}
-    .car-fill{fill:#071f56}
-    .white-fill{fill:#fff}
-    .brand-copy{
-      min-width:0;
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-    .brand-title{
-      font-size:34px;
-      font-weight:900;
+    .brand-name{
+      margin:0;
+      font-size:30px;
       line-height:1;
+      font-weight:900;
+      color:#fff;
       letter-spacing:.3px;
       text-transform:uppercase;
       white-space:nowrap;
     }
     .brand-tag{
-      color:var(--orange);
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:1.2px;
+      margin:5px 0 0;
+      color:var(--orange-2);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:1.25px;
       text-transform:uppercase;
+      white-space:nowrap;
     }
 
-    .main-nav{
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:rgba(7,31,86,.98);
+      backdrop-filter:blur(14px);
+      box-shadow:0 10px 30px rgba(7,31,86,.16);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 22px;
       display:flex;
       align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:18px;
     }
-    .main-nav a,
-    .main-nav button{
-      color:#fff;
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav button,.nav a{
       border:0;
       background:transparent;
-      font-weight:700;
+      color:#fff;
+      padding:10px 13px;
+      border-radius:12px;
       font-size:14px;
-      cursor:pointer;
-      padding:10px 14px;
-      border-radius:10px;
+      font-weight:800;
+      transition:.15s ease;
     }
-    .main-nav .cta{
+    .nav button:hover,.nav a:hover{background:rgba(255,255,255,.08)}
+    .nav .nav-outline{border:1px solid rgba(255,255,255,.16)}
+    .nav .nav-cta{
       background:linear-gradient(180deg,var(--orange-2),var(--orange));
-      box-shadow:0 8px 16px rgba(255,122,0,.25);
+      box-shadow:0 10px 22px rgba(255,107,0,.24);
     }
-    .main-nav .outline{
-      border:1px solid rgba(255,255,255,.18);
-    }
+    .nav .nav-cta:hover{background:linear-gradient(180deg,#ff9b43,var(--orange))}
 
-    .page-wrap{
+    .page{
       max-width:var(--max);
-      margin:24px auto 36px;
-      padding:0 20px;
+      margin:0 auto;
+      padding:26px 22px 46px;
     }
 
     .hero{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      background:var(--white);
+      background:#fff;
       border:1px solid var(--line);
-      border-radius:24px;
+      border-radius:30px;
+      box-shadow:var(--shadow);
       overflow:hidden;
-      box-shadow:var(--card-shadow);
-      margin-bottom:18px;
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      min-height:420px;
+      position:relative;
     }
     .hero-copy{
-      padding:34px 34px 24px;
+      padding:46px 42px;
       display:flex;
       flex-direction:column;
       justify-content:center;
+      position:relative;
+      z-index:2;
     }
-    .hero-copy h1{
-      margin:0 0 16px;
-      font-size:50px;
-      line-height:1.02;
-      letter-spacing:-1px;
-      max-width:580px;
-    }
-    .hero-copy h1 .accent{color:var(--orange)}
-    .hero-copy p{
-      margin:0 0 18px;
-      font-size:18px;
-      color:#30405f;
-      line-height:1.5;
-      max-width:540px;
-    }
-    .hero-points{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
-      margin-top:8px;
-    }
-    .mini-point{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      border-top:1px solid var(--line);
-      padding-top:14px;
-      min-width:0;
-    }
-    .mini-point-icon{
-      width:34px;height:34px;border-radius:10px;
-      display:grid;place-items:center;
-      background:#fff2e6;
-      color:var(--orange);
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:max-content;
+      background:var(--cream);
+      color:#a74400;
+      border:1px solid #ffd8b7;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
       font-weight:900;
-      flex:0 0 34px;
-    }
-    .mini-point strong{
-      display:block;
-      font-size:12px;
-      color:var(--text);
-      margin-bottom:3px;
+      letter-spacing:.5px;
       text-transform:uppercase;
+      margin-bottom:18px;
     }
-    .mini-point span{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.35;
-      display:block;
+    .hero h1{
+      margin:0;
+      font-size:58px;
+      line-height:.98;
+      letter-spacing:-1.6px;
+      max-width:660px;
+    }
+    .hero h1 .orange{color:var(--orange)}
+    .hero p{
+      max-width:570px;
+      margin:18px 0 0;
+      color:#32415f;
+      font-size:18px;
+      line-height:1.55;
+    }
+    .hero-actions{
+      margin-top:24px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
     }
     .hero-visual{
-      min-height:320px;
-      background:
-        linear-gradient(160deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 100%),
-        url("https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
       position:relative;
+      min-height:420px;
+      background:
+        linear-gradient(90deg,rgba(255,255,255,.95),rgba(255,255,255,.25) 34%,rgba(7,31,86,.14)),
+        url("https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1500&q=80") center/cover no-repeat;
     }
     .hero-visual::after{
       content:"";
-      position:absolute; inset:0;
-      background:linear-gradient(90deg, rgba(7,31,86,.06) 0%, rgba(7,31,86,.22) 100%);
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(7,31,86,0),rgba(7,31,86,.14));
     }
+    .hero-badge{
+      position:absolute;
+      right:22px;
+      bottom:22px;
+      background:rgba(7,31,86,.92);
+      color:#fff;
+      padding:16px;
+      border-radius:20px;
+      max-width:250px;
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
+    }
+    .hero-badge strong{display:block;font-size:18px;margin-bottom:4px}
+    .hero-badge span{color:#dbe7ff;font-size:13px;line-height:1.4}
+
+    .btn{
+      border:0;
+      border-radius:14px;
+      padding:13px 16px;
+      font-weight:900;
+      transition:.14s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:linear-gradient(180deg,var(--orange-2),var(--orange));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(255,107,0,.22);
+    }
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-navy{
+      background:linear-gradient(180deg,#1749aa,#0e347d);
+      color:#fff;
+      box-shadow:0 12px 24px rgba(14,52,125,.18);
+    }
+    .btn-soft{
+      background:#eef4ff;
+      color:#173a89;
+      border:1px solid #d9e6fb;
+    }
+    .btn-white{
+      background:#fff;
+      color:var(--navy);
+      border:1px solid var(--line);
+    }
+    .btn-danger{
+      background:var(--red);
+      color:#fff;
+    }
+
+    .benefit-strip{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin:18px 0 24px;
+    }
+    .benefit{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      border-radius:20px;
+      padding:18px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .benefit-icon{
+      width:42px;height:42px;
+      border-radius:14px;
+      background:var(--cream);
+      color:var(--orange);
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:20px;
+      flex:0 0 42px;
+    }
+    .benefit strong{display:block;font-size:15px;margin-bottom:4px}
+    .benefit span{display:block;color:var(--muted);font-size:13px;line-height:1.35}
 
     .search-panel{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:20px;
-      box-shadow:var(--card-shadow);
+      border-radius:24px;
+      box-shadow:var(--shadow);
       padding:16px;
       display:grid;
       grid-template-columns:2fr 1fr 1fr 1fr auto auto;
       gap:10px;
       align-items:end;
-      margin-bottom:22px;
+      margin-bottom:26px;
     }
-    .search-field label,
-    .form-field label{
+    label{
       display:block;
-      margin:0 0 6px;
+      margin:0 0 7px;
       font-size:12px;
-      font-weight:800;
+      font-weight:900;
+      color:#56657e;
       text-transform:uppercase;
-      color:#51607e;
-      letter-spacing:.4px;
+      letter-spacing:.45px;
     }
     input,select,textarea{
       width:100%;
-      border:1px solid #d8e0ee;
-      border-radius:12px;
-      padding:13px 14px;
+      border:1px solid #d9e2ef;
       background:#fff;
-      color:var(--text);
+      border-radius:14px;
+      padding:13px 14px;
+      color:var(--ink);
       outline:none;
+      transition:.12s ease;
     }
     input:focus,select:focus,textarea:focus{
-      border-color:#8fb3f0;
-      box-shadow:0 0 0 4px rgba(40,111,255,.08);
+      border-color:#96b8f4;
+      box-shadow:0 0 0 4px rgba(30,94,205,.08);
     }
-    textarea{min-height:96px;resize:vertical}
-    .btn{
-      border:0;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:800;
-      padding:14px 16px;
-      transition:.18s ease;
-      white-space:nowrap;
-    }
-    .btn-primary{
-      color:#fff;
-      background:linear-gradient(180deg,var(--orange-2),var(--orange));
-      box-shadow:0 10px 18px rgba(255,122,0,.22);
-    }
-    .btn-navy{
-      color:#fff;
-      background:linear-gradient(180deg,#1747a5,#0f3381);
-      box-shadow:0 10px 18px rgba(13,66,161,.18);
-    }
-    .btn-soft{
-      color:#18408e;
-      background:#edf3ff;
-      border:1px solid #dbe7fb;
-    }
-    .btn-danger{
-      color:#fff;
-      background:#d54d4d;
-    }
-    .btn-outline{
-      color:#16357d;
-      border:1px solid #cad7ef;
-      background:#fff;
-    }
+    textarea{min-height:100px;resize:vertical}
 
     .section-head{
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:flex-end;
       gap:16px;
-      margin:20px 2px 14px;
+      margin:20px 0 16px;
     }
-    .section-head h2{
-      margin:0;
-      font-size:26px;
-    }
-    .section-head p{
-      margin:4px 0 0;
-      color:var(--muted);
-      font-size:14px;
-    }
+    .section-head h2{margin:0;font-size:29px;letter-spacing:-.4px}
+    .section-head p{margin:6px 0 0;color:var(--muted);font-size:14px}
 
     .vehicle-grid{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:16px;
+      gap:18px;
     }
     .vehicle-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:22px;
       overflow:hidden;
-      box-shadow:var(--card-shadow);
+      box-shadow:var(--shadow-soft);
+      min-width:0;
       display:flex;
       flex-direction:column;
-      min-width:0;
-      position:relative;
+      transition:.16s ease;
     }
-    .vehicle-thumb{
-      position:relative;
+    .vehicle-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 22px 55px rgba(7,31,86,.14);
+    }
+    .vehicle-image{
       aspect-ratio:16/10;
-      background:#ebeff7;
+      background:#e8edf6;
+      position:relative;
       overflow:hidden;
     }
-    .vehicle-thumb img{
+    .vehicle-image img{
       width:100%;
       height:100%;
       object-fit:cover;
     }
-    .featured-tag{
+    .ribbon{
       position:absolute;
-      top:12px;left:12px;
+      top:12px;
+      left:12px;
       background:linear-gradient(180deg,var(--orange-2),var(--orange));
       color:#fff;
       font-size:11px;
-      font-weight:800;
+      font-weight:900;
       padding:7px 10px;
       border-radius:10px;
-      letter-spacing:.4px;
+      letter-spacing:.35px;
     }
-    .status-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      font-size:11px;
-      font-weight:800;
-      padding:6px 9px;
-      border-radius:999px;
-      line-height:1;
+    .heart{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:34px;height:34px;
+      border-radius:50%;
+      background:rgba(255,255,255,.9);
+      display:grid;
+      place-items:center;
+      color:var(--navy);
+      font-weight:900;
     }
-    .available{background:#e9f7ef;color:var(--green)}
-    .sold{background:#fdecec;color:var(--red)}
-    .pending{background:#fff5dd;color:#9c6a00}
-    .card-body{
-      padding:14px 14px 16px;
+    .vehicle-body{
+      padding:15px;
       display:flex;
       flex-direction:column;
       gap:10px;
       flex:1;
     }
+    .status{
+      width:max-content;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 9px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+    }
+    .status.available{background:var(--green-soft);color:var(--green)}
+    .status.sold{background:var(--red-soft);color:var(--red)}
+    .status.pending{background:var(--yellow-soft);color:var(--yellow)}
     .vehicle-title{
-      font-size:18px;
-      font-weight:800;
-      line-height:1.2;
       margin:0;
+      font-size:18px;
+      line-height:1.2;
+      font-weight:900;
     }
     .vehicle-price{
-      color:var(--text);
-      font-size:24px;
-      font-weight:900;
       margin:0;
+      font-size:26px;
+      font-weight:950;
+      color:var(--ink);
+      letter-spacing:-.4px;
     }
-    .vehicle-sub{
+    .vehicle-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 10px;
+      font-size:12px;
+      color:#4d5b73;
+      line-height:1.4;
+    }
+    .vehicle-meta span::before{content:"•";color:#9ca8bb;margin-right:7px}
+    .vehicle-meta span:first-child::before{display:none}
+    .seller-line{
+      display:flex;
+      align-items:center;
+      gap:9px;
       color:var(--muted);
       font-size:13px;
-      line-height:1.4;
-      margin:0;
+      line-height:1.35;
     }
-    .meta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      color:#47556f;
+    .avatar{
+      width:30px;height:30px;
+      border-radius:50%;
+      background:linear-gradient(180deg,var(--navy-2),var(--navy));
+      color:#fff;
+      display:grid;
+      place-items:center;
       font-size:12px;
+      font-weight:900;
+      flex:0 0 30px;
     }
-    .meta-row span::before{
-      content:"•";
-      margin-right:6px;
-      color:#97a4bb;
-    }
-    .meta-row span:first-child::before{display:none}
-    .action-row{
-      margin-top:auto;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .action-row .mini{
-      flex:1 1 auto;
-      text-align:center;
-      border-radius:10px;
-      padding:10px 12px;
-      font-size:13px;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .call{background:var(--orange);color:#fff}
-    .msg-btn{background:#f1f5ff;color:#16357d;border:1px solid #d7e2f8}
-    .share{background:#fff;border:1px solid #dde5f2;color:#324768}
-
-    .auth-panel,
-    .dashboard-shell,
-    .seller-yard-shell{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--card-shadow);
-      overflow:hidden;
-    }
-    .auth-panel{
+    .card-actions{
       display:grid;
       grid-template-columns:1fr 1fr;
-      min-height:540px;
+      gap:8px;
+      margin-top:auto;
     }
-    .auth-side{
-      background:linear-gradient(180deg,#081d52 0%, #0b2f75 100%);
+    .card-actions .wide{grid-column:1/-1}
+    .mini-btn{
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      font-weight:900;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      border:1px solid transparent;
+    }
+    .mini-call{background:var(--orange);color:#fff}
+    .mini-msg{background:#f2f6ff;color:#123b8c;border-color:#dce7fb}
+    .mini-outline{background:#fff;color:#223a66;border-color:#dfe6f2}
+
+    .notice{
+      background:#eef4ff;
+      border:1px solid #d5e3fb;
+      color:#173a89;
+      padding:13px 15px;
+      border-radius:14px;
+      margin-bottom:14px;
+      font-size:14px;
+      line-height:1.4;
+    }
+    .notice.error{
+      background:var(--red-soft);
+      border-color:#f3ced3;
+      color:#9b2732;
+    }
+
+    .auth-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      min-height:570px;
+    }
+    .auth-intro{
+      background:
+        radial-gradient(circle at 80% 10%, rgba(255,107,0,.18), transparent 32%),
+        linear-gradient(180deg,var(--navy),var(--navy-2));
       color:#fff;
-      padding:36px 30px;
+      padding:42px 34px;
       display:flex;
       flex-direction:column;
       justify-content:center;
-      gap:18px;
     }
-    .auth-side h2{margin:0;font-size:38px;line-height:1.05}
-    .auth-side p{margin:0;color:#dbe7ff;line-height:1.55}
-    .auth-side ul{margin:0;padding-left:18px;color:#dbe7ff;line-height:1.8}
+    .auth-intro h2{
+      margin:24px 0 14px;
+      font-size:42px;
+      line-height:1.04;
+      letter-spacing:-.8px;
+    }
+    .auth-intro p{margin:0;color:#dbe7ff;line-height:1.55;font-size:16px}
+    .auth-list{
+      display:grid;
+      gap:12px;
+      margin-top:24px;
+    }
+    .auth-list div{
+      display:flex;
+      gap:10px;
+      color:#e8f0ff;
+      font-size:14px;
+      align-items:flex-start;
+    }
+    .auth-list b{
+      color:var(--orange-2);
+      font-size:16px;
+    }
     .auth-main{
-      padding:30px;
+      padding:34px;
+      display:grid;
+      align-content:center;
+      gap:16px;
     }
     .auth-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:18px;
+      gap:16px;
     }
-    .card-box{
+    .form-card{
       background:#f8faff;
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:22px;
       padding:18px;
     }
-    .card-box h3{
-      margin:0 0 14px;
-      font-size:20px;
-    }
+    .form-card h3{margin:0 0 14px;font-size:21px}
+    .form-field{margin-bottom:12px}
 
-    .dashboard-shell{
-      display:grid;
-      grid-template-columns:250px 1fr;
-      min-height:900px;
-    }
-    .dash-sidebar{
-      border-right:1px solid var(--line);
+    .dashboard{
       background:#fff;
-      padding:22px 18px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:260px 1fr;
+      min-height:920px;
+    }
+    .sidebar{
+      background:#fff;
+      border-right:1px solid var(--line);
+      padding:22px 16px;
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:20px;
     }
-    .dash-brand{
+    .side-brand{
       display:flex;
       align-items:center;
       gap:10px;
-      padding-bottom:10px;
+      padding-bottom:16px;
       border-bottom:1px solid var(--line);
     }
-    .dash-brand .mini-title{
-      font-weight:900;
+    .side-brand strong{
+      font-size:18px;
+      line-height:1;
       text-transform:uppercase;
-      line-height:1.05;
-      font-size:19px;
     }
-    .side-nav{
-      display:flex;
-      flex-direction:column;
+    .side-links{
+      display:grid;
       gap:8px;
     }
-    .side-nav button{
+    .side-links button{
       border:0;
       background:transparent;
+      color:#253a62;
+      padding:13px 13px;
+      border-radius:14px;
       text-align:left;
-      padding:12px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:700;
-      color:#20365c;
+      font-weight:800;
+      transition:.12s;
     }
-    .side-nav button.active,
-    .side-nav button:hover{
+    .side-links button:hover,
+    .side-links button.active{
       background:#eef4ff;
-      color:#12367d;
+      color:#123b8c;
     }
+    .sidebar-tip{
+      margin-top:auto;
+      background:linear-gradient(180deg,#0e347d,var(--navy));
+      color:#fff;
+      padding:16px;
+      border-radius:20px;
+    }
+    .sidebar-tip strong{display:block;margin-bottom:6px}
+    .sidebar-tip span{display:block;color:#dbe7ff;font-size:13px;line-height:1.45}
     .dash-main{
-      padding:24px;
       background:#fbfcff;
+      padding:26px;
     }
     .dash-top{
       display:flex;
-      align-items:flex-start;
       justify-content:space-between;
-      gap:16px;
+      align-items:flex-start;
+      gap:18px;
       margin-bottom:18px;
-      flex-wrap:wrap;
     }
-    .dash-top h2{
-      margin:0;
-      font-size:32px;
-    }
-    .dash-top p{
-      margin:8px 0 0;
-      color:var(--muted);
-    }
-    .stats-grid{
+    .dash-top h2{margin:0;font-size:34px;letter-spacing:-.8px}
+    .dash-top p{margin:7px 0 0;color:var(--muted)}
+    .stat-grid{
       display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
+      grid-template-columns:repeat(4,1fr);
       gap:14px;
-      margin-bottom:20px;
+      margin-bottom:18px;
     }
-    .stat-card{
+    .stat{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-      box-shadow:var(--card-shadow);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:var(--shadow-soft);
     }
-    .stat-card .num{
+    .stat .num{
       display:block;
-      font-size:30px;
-      font-weight:900;
-      margin-bottom:8px;
+      font-size:32px;
+      font-weight:950;
+      letter-spacing:-.8px;
+      margin-bottom:5px;
     }
-    .stat-card .label{
+    .stat .label{
       color:var(--muted);
       font-size:13px;
-      font-weight:700;
+      font-weight:800;
     }
-    .content-cards{
-      display:grid;
-      gap:18px;
-    }
-    .panel-card{
+    .dash-panel{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:18px;
-      padding:18px;
-      box-shadow:var(--card-shadow);
+      border-radius:22px;
+      padding:20px;
+      box-shadow:var(--shadow-soft);
+      margin-bottom:16px;
     }
-    .panel-card h3{
-      margin:0 0 14px;
-      font-size:22px;
+    .dash-panel h3{
+      margin:0 0 16px;
+      font-size:23px;
     }
-    .two-col{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-    .three-col{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:14px;
-    }
+    .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .checkline{
       display:flex;
       align-items:center;
       gap:8px;
+      color:#30415f;
       font-size:14px;
-      color:#324768;
-      margin:8px 0 0;
+      margin:10px 0 0;
+      font-weight:700;
     }
     .checkline input{width:auto}
     .seller-link{
-      background:#fff7ef;
-      border:1px solid #ffd8b3;
-      color:#8a4b08;
-      border-radius:12px;
-      padding:12px 14px;
-      font-size:14px;
-      margin-top:14px;
+      background:var(--cream);
+      border:1px solid #ffd4ad;
+      color:#874200;
+      padding:13px;
+      border-radius:14px;
       word-break:break-all;
+      margin:10px 0 12px;
+      font-size:14px;
     }
-    .dash-vehicle-list{
+    .dash-list{display:grid;gap:12px}
+    .dash-item{
       display:grid;
-      gap:12px;
-    }
-    .dash-vehicle-item{
-      display:grid;
-      grid-template-columns:110px 1fr auto;
+      grid-template-columns:120px 1fr auto;
       gap:14px;
       align-items:center;
       border:1px solid var(--line);
-      border-radius:14px;
-      padding:10px;
+      border-radius:18px;
+      padding:12px;
+      background:#fff;
     }
-    .dash-vehicle-thumb{
-      width:110px;
+    .dash-thumb{
+      width:120px;
       aspect-ratio:16/10;
-      border-radius:10px;
+      border-radius:14px;
       overflow:hidden;
-      background:#eef2f8;
+      background:#e8edf6;
     }
-    .dash-vehicle-thumb img{
-      width:100%;height:100%;object-fit:cover;
-    }
-    .dash-vehicle-item h4{
-      margin:0 0 6px;
-      font-size:17px;
-    }
-    .dash-vehicle-item p{
-      margin:0;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .small-actions{
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
+    .dash-thumb img{width:100%;height:100%;object-fit:cover}
+    .dash-item h4{margin:0 0 5px;font-size:17px}
+    .dash-item p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+    .small-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 
-    .seller-yard-shell{
-      padding:18px;
-    }
-    .seller-yard-head{
-      display:grid;
-      grid-template-columns:290px 1fr;
-      gap:18px;
-      margin-bottom:18px;
-      align-items:start;
-    }
-    .seller-profile-card{
+    .seller-yard{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .seller-head{
+      display:grid;
+      grid-template-columns:300px 1fr;
+      gap:20px;
+    }
+    .seller-profile{
+      border:1px solid var(--line);
+      border-radius:24px;
       overflow:hidden;
-      box-shadow:var(--card-shadow);
+      background:#fff;
+      box-shadow:var(--shadow-soft);
     }
     .seller-cover{
-      aspect-ratio:16/10;
-      background:url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80") center/cover no-repeat;
+      height:170px;
+      background:
+        linear-gradient(180deg,rgba(7,31,86,.05),rgba(7,31,86,.3)),
+        url("https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1000&q=80") center/cover no-repeat;
     }
-    .seller-body{
-      padding:16px;
-    }
-    .seller-body h2{margin:0 0 8px;font-size:28px}
-    .seller-body p{margin:0 0 10px;color:var(--muted);line-height:1.5}
-    .seller-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .seller-info{padding:18px}
+    .seller-info h2{margin:0 0 7px;font-size:28px}
+    .seller-info p{margin:0 0 10px;color:var(--muted);line-height:1.5}
     .trust-row{
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
-      margin-top:16px;
-      color:#44526d;
-      font-size:13px;
+      gap:8px;
+      margin-top:14px;
     }
     .trust-row span{
-      background:#f7f9fd;
       border:1px solid var(--line);
+      background:#f8faff;
       border-radius:999px;
       padding:8px 10px;
-    }
-
-    .notice{
-      padding:12px 14px;
-      border-radius:12px;
-      background:#eef4ff;
-      border:1px solid #d7e3fa;
-      color:#174593;
-      margin:0 0 14px;
-      font-size:14px;
-    }
-    .error{
-      background:#fdeced !important;
-      border-color:#f4ced1 !important;
-      color:#a7373f !important;
+      font-size:12px;
+      font-weight:800;
+      color:#334768;
     }
     .footer-note{
-      margin-top:28px;
       text-align:center;
-      color:#6b7894;
+      color:#71809a;
       font-size:13px;
+      margin:26px 0 0;
     }
 
-    @media (max-width:1180px){
-      .vehicle-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-      .search-panel{grid-template-columns:1fr 1fr 1fr 1fr}
+    @media(max-width:1180px){
       .hero{grid-template-columns:1fr}
-      .auth-panel{grid-template-columns:1fr}
-      .dashboard-shell{grid-template-columns:1fr}
-      .dash-sidebar{border-right:0;border-bottom:1px solid var(--line)}
-      .seller-yard-head{grid-template-columns:1fr}
+      .vehicle-grid{grid-template-columns:repeat(3,1fr)}
+      .search-panel{grid-template-columns:1fr 1fr 1fr}
+      .dashboard{grid-template-columns:1fr}
+      .sidebar{border-right:0;border-bottom:1px solid var(--line)}
+      .sidebar-tip{display:none}
+      .seller-head{grid-template-columns:1fr}
+      .auth-card{grid-template-columns:1fr}
     }
-    @media (max-width:900px){
+    @media(max-width:900px){
       .topbar-inner{align-items:flex-start}
-      .brand-title{font-size:26px}
-      .hero-copy h1{font-size:38px}
-      .hero-points{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .vehicle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .stats-grid,.two-col,.three-col,.auth-grid{grid-template-columns:1fr 1fr}
+      .nav{width:100%;justify-content:flex-start}
+      .hero h1{font-size:42px}
+      .hero-copy{padding:32px 24px}
+      .benefit-strip{grid-template-columns:1fr 1fr}
+      .vehicle-grid{grid-template-columns:repeat(2,1fr)}
+      .stat-grid,.form-grid-2,.form-grid-3,.auth-grid{grid-template-columns:1fr 1fr}
       .search-panel{grid-template-columns:1fr 1fr}
     }
-    @media (max-width:640px){
-      .page-wrap{padding:0 14px}
+    @media(max-width:640px){
+      .topbar{position:static}
       .topbar-inner{padding:14px}
-      .brand{align-items:flex-start}
-      .brand-title{font-size:22px;white-space:normal}
-      .brand-tag{font-size:10px}
-      .main-nav{width:100%}
-      .main-nav a,.main-nav button{font-size:13px;padding:9px 10px}
-      .hero-copy{padding:24px 18px}
-      .hero-copy h1{font-size:30px}
-      .vehicle-grid{grid-template-columns:1fr}
-      .stats-grid,.two-col,.three-col,.auth-grid,.search-panel{grid-template-columns:1fr}
-      .dash-main{padding:14px}
-      .dash-vehicle-item{grid-template-columns:1fr}
-      .dash-vehicle-thumb{width:100%}
+      .page{padding:18px 14px 34px}
+      .brand-name{font-size:21px;white-space:normal}
+      .brand-tag{font-size:9px;white-space:normal}
+      .logo{width:44px;height:52px;flex-basis:44px}
+      .nav button,.nav a{font-size:12px;padding:9px 10px}
+      .hero{border-radius:22px}
+      .hero-copy{padding:26px 18px}
+      .hero h1{font-size:32px}
+      .hero p{font-size:16px}
+      .hero-visual{min-height:250px}
+      .hero-badge{left:16px;right:16px;bottom:16px}
+      .benefit-strip,.vehicle-grid,.stat-grid,.form-grid-2,.form-grid-3,.auth-grid,.search-panel{grid-template-columns:1fr}
+      .auth-main,.auth-intro,.dash-main{padding:18px}
+      .dashboard,.auth-card,.seller-yard{border-radius:22px}
+      .dash-item{grid-template-columns:1fr}
+      .dash-thumb{width:100%}
+      .small-actions{justify-content:flex-start}
+      .section-head{align-items:flex-start;flex-direction:column}
     }
   </style>
 </head>
 <body>
-<div class="app-shell">
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand">
-        <div class="logo-badge" aria-label="Your Car Yard logo">
+      <a class="brand" href="#" onclick="showView('home')">
+        <div class="logo" aria-label="Your Car Yard logo">
           <svg viewBox="0 0 100 112" role="img" aria-hidden="true">
             <path class="pin-fill" d="M50 4C28.2 4 10.5 21.6 10.5 43.3c0 28.4 39.5 64.7 39.5 64.7s39.5-36.3 39.5-64.7C89.5 21.6 71.8 4 50 4z"/>
             <circle class="white-fill" cx="50" cy="43" r="29"/>
             <path class="car-fill" d="M30.5 48.2l3.5-10.4c1.1-3.2 4.1-5.4 7.5-5.4h17c3.4 0 6.4 2.2 7.5 5.4l3.5 10.4c3.4 1.3 5.8 4.5 5.8 8.3v7.2c0 1.5-1.2 2.7-2.7 2.7h-3.8c-1.5 0-2.7-1.2-2.7-2.7v-2H33.4v2c0 1.5-1.2 2.7-2.7 2.7h-3.8c-1.5 0-2.7-1.2-2.7-2.7v-7.2c0-3.8 2.4-7 6.3-8.3z"/>
             <path class="white-fill" d="M39.2 37.2h21.6c1.3 0 2.5.8 2.9 2.1l2.3 7H34l2.3-7c.4-1.3 1.6-2.1 2.9-2.1z"/>
+            <rect class="white-fill" x="31" y="52.8" width="11" height="4" rx="2"/>
+            <rect class="white-fill" x="58" y="52.8" width="11" height="4" rx="2"/>
           </svg>
         </div>
-        <div class="brand-copy">
-          <div class="brand-title">Your Car Yard</div>
-          <div class="brand-tag">Small Sellers. Simple Online Yards.</div>
+        <div>
+          <h1 class="brand-name">Your Car Yard</h1>
+          <p class="brand-tag">Small Sellers. Simple Online Yards.</p>
         </div>
-      </div>
+      </a>
 
-      <nav class="main-nav">
+      <nav class="nav">
         <button onclick="showView('home')">Browse Cars</button>
-        <button onclick="showView('auth')">How It Works</button>
-        <button onclick="showView('dashboard')" class="outline">For Sellers</button>
-        <button id="loginTopBtn" onclick="showView('auth')" class="outline">Login</button>
-        <button onclick="showView('auth')" class="cta">Sign Up</button>
+        <button onclick="scrollToHowItWorks()">How It Works</button>
+        <button onclick="showView('dashboard')">For Sellers</button>
+        <button id="loginTopBtn" class="nav-outline" onclick="showView('auth')">Login</button>
+        <button class="nav-cta" onclick="showView('auth')">List My Car</button>
       </nav>
     </div>
   </header>
 
-  <div class="page-wrap">
+  <main class="page">
     <section id="homeView">
       <div id="homeHero" class="hero">
         <div class="hero-copy">
-          <h1>Browse cars from<br><span class="accent">small local sellers</span></h1>
-          <p>Find great cars. Support local sellers. Simple, transparent and hassle-free. Create your own mini car yard and share one easy link.</p>
-          <div class="hero-points">
-            <div class="mini-point">
-              <div class="mini-point-icon">★</div>
-              <div><strong>For Small Sellers</strong><span>List 2-3 cars or more.</span></div>
-            </div>
-            <div class="mini-point">
-              <div class="mini-point-icon">↗</div>
-              <div><strong>Your Own Yard</strong><span>Get your unique link.</span></div>
-            </div>
-            <div class="mini-point">
-              <div class="mini-point-icon">✓</div>
-              <div><strong>Easy to Manage</strong><span>Run it from your phone.</span></div>
-            </div>
-            <div class="mini-point">
-              <div class="mini-point-icon">◎</div>
-              <div><strong>More Exposure</strong><span>Reach more buyers.</span></div>
-            </div>
+          <div class="eyebrow">● Local seller marketplace</div>
+          <h1>Browse cars from small <span class="orange">local sellers</span></h1>
+          <p>Find cars from independent sellers and small home-based yards. Sellers can create their own mini car yard, list vehicles and share one simple link.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="showView('auth')">Create My Yard</button>
+            <button class="btn btn-white" onclick="document.getElementById('searchPanel').scrollIntoView({behavior:'smooth'})">Browse Cars</button>
           </div>
         </div>
-        <div class="hero-visual"></div>
+        <div class="hero-visual">
+          <div class="hero-badge">
+            <strong>Your yard. Your cars. Your way.</strong>
+            <span>List 2 cars or 20 and send buyers one clean share link.</span>
+          </div>
+        </div>
       </div>
 
-      <div class="search-panel">
-        <div class="search-field">
+      <div id="howItWorks" class="benefit-strip">
+        <div class="benefit"><div class="benefit-icon">✓</div><div><strong>For Small Sellers</strong><span>List a few vehicles without needing a full website.</span></div></div>
+        <div class="benefit"><div class="benefit-icon">⌁</div><div><strong>Your Own Yard</strong><span>Each seller gets a unique shareable yard link.</span></div></div>
+        <div class="benefit"><div class="benefit-icon">↗</div><div><strong>Simple to Manage</strong><span>Add, edit and mark vehicles sold from your dashboard.</span></div></div>
+        <div class="benefit"><div class="benefit-icon">◎</div><div><strong>Buyer Friendly</strong><span>Clear vehicle cards with call, message and share options.</span></div></div>
+      </div>
+
+      <div id="searchPanel" class="search-panel">
+        <div>
           <label>Search</label>
-          <input id="searchInput" placeholder="Search make, model or keyword" oninput="renderMarketplace()" />
+          <input id="searchInput" placeholder="Search make, model, suburb or keyword" oninput="renderMarketplace()" />
         </div>
-        <div class="search-field">
+        <div>
           <label>Make</label>
           <select id="filterMake"></select>
         </div>
-        <div class="search-field">
+        <div>
           <label>Model</label>
           <select id="filterModel"></select>
         </div>
-        <div class="search-field">
+        <div>
           <label>Fuel</label>
           <select id="filterFuel">
             <option value="">All Fuel</option>
@@ -792,25 +883,26 @@
           </select>
         </div>
         <button class="btn btn-primary" onclick="renderMarketplace()">Search</button>
-        <button class="btn btn-navy" onclick="clearFilters()">Show All Cars</button>
+        <button class="btn btn-navy" onclick="clearFilters()">Show All</button>
       </div>
 
       <div class="section-head">
         <div>
           <h2>Featured Cars</h2>
-          <p>Browse the latest vehicles from independent local sellers.</p>
+          <p>Latest vehicles from independent sellers and small local yards.</p>
         </div>
+        <button class="btn btn-soft" onclick="clearFilters()">View all cars</button>
       </div>
       <div id="homeNotice" class="notice hidden"></div>
       <div id="vehicleGrid" class="vehicle-grid"></div>
-      <div class="footer-note">Your Car Yard connects buyers with smaller home-based car sellers.</div>
+      <div class="footer-note">© Your Car Yard. Small sellers. Simple online yards.</div>
     </section>
 
     <section id="authView" class="hidden">
-      <div class="auth-panel">
-        <div class="auth-side">
-          <div class="brand" style="margin-bottom:10px;">
-            <div class="logo-badge">
+      <div class="auth-card">
+        <div class="auth-intro">
+          <div class="brand">
+            <div class="logo">
               <svg viewBox="0 0 100 112" role="img" aria-hidden="true">
                 <path class="pin-fill" d="M50 4C28.2 4 10.5 21.6 10.5 43.3c0 28.4 39.5 64.7 39.5 64.7s39.5-36.3 39.5-64.7C89.5 21.6 71.8 4 50 4z"/>
                 <circle class="white-fill" cx="50" cy="43" r="29"/>
@@ -818,47 +910,35 @@
                 <path class="white-fill" d="M39.2 37.2h21.6c1.3 0 2.5.8 2.9 2.1l2.3 7H34l2.3-7c.4-1.3 1.6-2.1 2.9-2.1z"/>
               </svg>
             </div>
-            <div class="brand-copy">
-              <div class="brand-title" style="font-size:28px;">Your Car Yard</div>
-              <div class="brand-tag">Small Sellers. Simple Online Yards.</div>
+            <div>
+              <h1 class="brand-name">Your Car Yard</h1>
+              <p class="brand-tag">Small Sellers. Simple Online Yards.</p>
             </div>
           </div>
           <h2>Create your own online car yard.</h2>
-          <p>List 2 cars or 20. Share one simple link. Manage everything from your phone with your own seller profile and dashboard.</p>
-          <ul>
-            <li>Build your own mini car yard</li>
-            <li>List and manage vehicles yourself</li>
-            <li>Share your unique yard link</li>
-            <li>Be seen in the main marketplace</li>
-          </ul>
+          <p>Set up your seller profile, add vehicles, and share your unique yard link with buyers.</p>
+          <div class="auth-list">
+            <div><b>01</b><span>Create your account</span></div>
+            <div><b>02</b><span>Save your seller profile</span></div>
+            <div><b>03</b><span>Add vehicles and photos</span></div>
+            <div><b>04</b><span>Share your car yard link</span></div>
+          </div>
         </div>
+
         <div class="auth-main">
           <div id="authNotice" class="notice hidden"></div>
           <div class="auth-grid">
-            <div class="card-box">
+            <div class="form-card">
               <h3>Create Account</h3>
-              <div class="form-field">
-                <label>Email</label>
-                <input id="signupEmail" type="email" placeholder="you@example.com" />
-              </div>
-              <div class="form-field">
-                <label>Password</label>
-                <input id="signupPassword" type="password" placeholder="Create a password" />
-              </div>
-              <button class="btn btn-primary" style="margin-top:8px;width:100%;" onclick="signUp()">Create Account</button>
+              <div class="form-field"><label>Email</label><input id="signupEmail" type="email" placeholder="you@example.com" /></div>
+              <div class="form-field"><label>Password</label><input id="signupPassword" type="password" placeholder="Create a password" /></div>
+              <button class="btn btn-primary" style="width:100%;" onclick="signUp()">Create Account</button>
             </div>
-
-            <div class="card-box">
+            <div class="form-card">
               <h3>Login</h3>
-              <div class="form-field">
-                <label>Email</label>
-                <input id="loginEmail" type="email" placeholder="you@example.com" />
-              </div>
-              <div class="form-field">
-                <label>Password</label>
-                <input id="loginPassword" type="password" placeholder="Your password" />
-              </div>
-              <button class="btn btn-navy" style="margin-top:8px;width:100%;" onclick="login()">Login</button>
+              <div class="form-field"><label>Email</label><input id="loginEmail" type="email" placeholder="you@example.com" /></div>
+              <div class="form-field"><label>Password</label><input id="loginPassword" type="password" placeholder="Your password" /></div>
+              <button class="btn btn-navy" style="width:100%;" onclick="login()">Login</button>
             </div>
           </div>
         </div>
@@ -866,10 +946,10 @@
     </section>
 
     <section id="dashboardView" class="hidden">
-      <div class="dashboard-shell">
-        <aside class="dash-sidebar">
-          <div class="dash-brand">
-            <div class="logo-badge" style="width:38px;height:42px;flex-basis:38px;">
+      <div class="dashboard">
+        <aside class="sidebar">
+          <div class="side-brand">
+            <div class="logo" style="width:42px;height:50px;flex-basis:42px;">
               <svg viewBox="0 0 100 112" role="img" aria-hidden="true">
                 <path class="pin-fill" d="M50 4C28.2 4 10.5 21.6 10.5 43.3c0 28.4 39.5 64.7 39.5 64.7s39.5-36.3 39.5-64.7C89.5 21.6 71.8 4 50 4z"/>
                 <circle class="white-fill" cx="50" cy="43" r="29"/>
@@ -877,10 +957,10 @@
                 <path class="white-fill" d="M39.2 37.2h21.6c1.3 0 2.5.8 2.9 2.1l2.3 7H34l2.3-7c.4-1.3 1.6-2.1 2.9-2.1z"/>
               </svg>
             </div>
-            <div class="mini-title">Your<br>Car Yard</div>
+            <strong>Your<br>Car Yard</strong>
           </div>
 
-          <div class="side-nav">
+          <div class="side-links">
             <button class="active" onclick="activateDashTab(this,'overviewSection')">Dashboard</button>
             <button onclick="activateDashTab(this,'profileSection')">My Profile</button>
             <button onclick="activateDashTab(this,'vehiclesSection')">My Vehicles</button>
@@ -888,15 +968,21 @@
             <button onclick="activateDashTab(this,'shareSection')">My Yard Link</button>
             <button onclick="logout()">Logout</button>
           </div>
+
+          <div class="sidebar-tip">
+            <strong>Quick tip</strong>
+            <span>Use clear photos and a short honest description to get better enquiries.</span>
+          </div>
         </aside>
 
         <div class="dash-main">
           <div id="dashboardNotice" class="notice hidden"></div>
+
           <div id="dashboardLoggedOut">
-            <div class="panel-card">
+            <div class="dash-panel">
               <h3>Seller Login Required</h3>
-              <p>You need to sign up or log in before you can use your seller dashboard.</p>
-              <button class="btn btn-primary" onclick="showView('auth')">Go to Sign Up / Login</button>
+              <p>You need to sign up or login before you can manage vehicles.</p>
+              <button class="btn btn-primary" onclick="showView('auth')">Go to Login</button>
             </div>
           </div>
 
@@ -904,151 +990,87 @@
             <div class="dash-top">
               <div>
                 <h2 id="welcomeHeading">Welcome back.</h2>
-                <p>Here is what's happening in your car yard.</p>
+                <p>Manage your seller profile, vehicles and share link.</p>
               </div>
               <button class="btn btn-soft" onclick="openMyPublicYard()">View My Yard</button>
             </div>
 
             <div id="overviewSection" class="dash-tab">
-              <div class="stats-grid">
-                <div class="stat-card"><span id="statVehicles" class="num">0</span><span class="label">Vehicles Listed</span></div>
-                <div class="stat-card"><span id="statAvailable" class="num">0</span><span class="label">Available</span></div>
-                <div class="stat-card"><span id="statComing" class="num">0</span><span class="label">Coming Soon</span></div>
-                <div class="stat-card"><span id="statSold" class="num">0</span><span class="label">Sold</span></div>
+              <div class="stat-grid">
+                <div class="stat"><span id="statVehicles" class="num">0</span><span class="label">Vehicles Listed</span></div>
+                <div class="stat"><span id="statAvailable" class="num">0</span><span class="label">Available</span></div>
+                <div class="stat"><span id="statComing" class="num">0</span><span class="label">Coming Soon</span></div>
+                <div class="stat"><span id="statSold" class="num">0</span><span class="label">Sold</span></div>
               </div>
             </div>
 
-            <div class="content-cards">
-              <div id="profileSection" class="panel-card dash-tab">
-                <h3>My Profile</h3>
-                <div class="two-col">
-                  <div class="form-field">
-                    <label>Yard Name</label>
-                    <input id="yardName" placeholder="John's Car Yard" />
-                  </div>
-                  <div class="form-field">
-                    <label>Unique Link Slug</label>
-                    <input id="yardSlug" placeholder="johns-car-yard" />
-                  </div>
-                  <div class="form-field">
-                    <label>Display Name</label>
-                    <input id="displayName" placeholder="John Smith" />
-                  </div>
-                  <div class="form-field">
-                    <label>Suburb</label>
-                    <input id="sellerSuburb" placeholder="Windsor" />
-                  </div>
-                  <div class="form-field">
-                    <label>State</label>
-                    <input id="sellerState" placeholder="NSW" />
-                  </div>
-                  <div class="form-field">
-                    <label>Phone</label>
-                    <input id="sellerPhone" placeholder="0412 345 678" />
-                  </div>
-                  <div class="form-field">
-                    <label>SMS</label>
-                    <input id="sellerSms" placeholder="0412 345 678" />
-                  </div>
-                  <div class="form-field">
-                    <label>Email</label>
-                    <input id="sellerEmail" placeholder="you@example.com" />
-                  </div>
-                </div>
-                <div class="form-field">
-                  <label>About Your Yard</label>
-                  <textarea id="sellerAbout" placeholder="Local seller with quality vehicles. Finance available. Trade-ins welcome."></textarea>
-                </div>
-                <label class="checkline"><input id="showEmailToggle" type="checkbox" checked /> Show email button publicly</label>
-                <button class="btn btn-primary" style="margin-top:14px;" onclick="saveProfile()">Save Profile</button>
+            <div id="profileSection" class="dash-panel dash-tab">
+              <h3>My Profile</h3>
+              <div class="form-grid-2">
+                <div><label>Yard Name</label><input id="yardName" placeholder="John's Car Yard" /></div>
+                <div><label>Unique Link Slug</label><input id="yardSlug" placeholder="johns-car-yard" /></div>
+                <div><label>Display Name</label><input id="displayName" placeholder="John Smith" /></div>
+                <div><label>Suburb</label><input id="sellerSuburb" placeholder="Windsor" /></div>
+                <div><label>State</label><input id="sellerState" placeholder="NSW" /></div>
+                <div><label>Phone</label><input id="sellerPhone" placeholder="0412 345 678" /></div>
+                <div><label>SMS</label><input id="sellerSms" placeholder="0412 345 678" /></div>
+                <div><label>Email</label><input id="sellerEmail" placeholder="you@example.com" /></div>
               </div>
+              <div style="margin-top:14px;"><label>About Your Yard</label><textarea id="sellerAbout" placeholder="Local seller with quality vehicles. Finance available. Trade-ins welcome."></textarea></div>
+              <label class="checkline"><input id="showEmailToggle" type="checkbox" checked /> Show email button publicly</label>
+              <button class="btn btn-primary" style="margin-top:14px;" onclick="saveProfile()">Save Profile</button>
+            </div>
 
-              <div id="shareSection" class="panel-card dash-tab">
-                <h3>My Yard Link</h3>
-                <p style="margin:0 0 10px;color:var(--muted);">This is the link you can share with your contacts.</p>
-                <div id="shareLinkBox" class="seller-link hidden"></div>
-                <button class="btn btn-soft" onclick="copyYardLink()">Copy Link</button>
+            <div id="shareSection" class="dash-panel dash-tab">
+              <h3>My Yard Link</h3>
+              <p style="margin:0 0 10px;color:var(--muted);">Share this with buyers so they can view your vehicles.</p>
+              <div id="shareLinkBox" class="seller-link hidden"></div>
+              <button class="btn btn-soft" onclick="copyYardLink()">Copy Link</button>
+            </div>
+
+            <div id="addVehicleSection" class="dash-panel dash-tab">
+              <h3>Add / Edit Vehicle</h3>
+              <input id="editingVehicleId" type="hidden" />
+              <div class="form-grid-3">
+                <div><label>Make</label><input id="vMake" /></div>
+                <div><label>Model</label><input id="vModel" /></div>
+                <div><label>Variant</label><input id="vVariant" /></div>
+                <div><label>Year</label><input id="vYear" type="number" /></div>
+                <div><label>Kilometres</label><input id="vKms" type="number" /></div>
+                <div><label>Colour</label><input id="vColour" /></div>
+                <div><label>Transmission</label><input id="vTransmission" /></div>
+                <div><label>Fuel</label><input id="vFuel" /></div>
+                <div><label>Body Type</label><input id="vBodyType" /></div>
+                <div><label>Price</label><input id="vPrice" type="number" /></div>
+                <div><label>Price Label</label><select id="vPriceLabel"><option>Drive Away</option><option>Negotiable</option><option>ONO</option><option>Trade-ins Welcome</option></select></div>
+                <div><label>Status</label><select id="vStatus"><option>Available</option><option>Coming Soon</option><option>Sold</option><option>Hidden</option></select></div>
               </div>
-
-              <div id="addVehicleSection" class="panel-card dash-tab">
-                <h3>Add / Edit Vehicle</h3>
-                <input id="editingVehicleId" type="hidden" />
-                <div class="three-col">
-                  <div class="form-field"><label>Make</label><input id="vMake" /></div>
-                  <div class="form-field"><label>Model</label><input id="vModel" /></div>
-                  <div class="form-field"><label>Variant</label><input id="vVariant" /></div>
-                  <div class="form-field"><label>Year</label><input id="vYear" type="number" /></div>
-                  <div class="form-field"><label>Kilometres</label><input id="vKms" type="number" /></div>
-                  <div class="form-field"><label>Colour</label><input id="vColour" /></div>
-                  <div class="form-field"><label>Transmission</label><input id="vTransmission" /></div>
-                  <div class="form-field"><label>Fuel</label><input id="vFuel" /></div>
-                  <div class="form-field"><label>Body Type</label><input id="vBodyType" /></div>
-                  <div class="form-field"><label>Price</label><input id="vPrice" type="number" /></div>
-                  <div class="form-field">
-                    <label>Price Label</label>
-                    <select id="vPriceLabel">
-                      <option>Drive Away</option>
-                      <option>Negotiable</option>
-                      <option>ONO</option>
-                      <option>Trade-ins Welcome</option>
-                    </select>
-                  </div>
-                  <div class="form-field">
-                    <label>Status</label>
-                    <select id="vStatus">
-                      <option>Available</option>
-                      <option>Coming Soon</option>
-                      <option>Sold</option>
-                      <option>Hidden</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-field">
-                  <label>Description</label>
-                  <textarea id="vDescription" placeholder="Vehicle description"></textarea>
-                </div>
-
-                <div class="three-col">
-                  <div>
-                    <label class="checkline"><input id="vFeatured" type="checkbox" /> Featured vehicle</label>
-                    <label class="checkline"><input id="showService" type="checkbox" /> Show service history</label>
-                    <input id="vService" placeholder="Service history" style="margin-top:8px;" />
-                  </div>
-                  <div>
-                    <label class="checkline"><input id="showRoadworthy" type="checkbox" /> Show roadworthy</label>
-                    <input id="vRoadworthy" placeholder="Roadworthy" style="margin-top:8px;" />
-                  </div>
-                  <div>
-                    <label class="checkline"><input id="showWarranty" type="checkbox" /> Show warranty</label>
-                    <input id="vWarranty" placeholder="Warranty" style="margin-top:8px;" />
-                  </div>
-                </div>
-
-                <div class="three-col" style="margin-top:14px;">
-                  <div class="form-field"><label>Main Photo</label><input id="mainPhoto" type="file" accept="image/*" /></div>
-                  <div class="form-field"><label>View 1</label><input class="extraPhoto" type="file" accept="image/*" /></div>
-                  <div class="form-field"><label>View 2</label><input class="extraPhoto" type="file" accept="image/*" /></div>
-                  <div class="form-field"><label>View 3</label><input class="extraPhoto" type="file" accept="image/*" /></div>
-                  <div class="form-field"><label>View 4</label><input class="extraPhoto" type="file" accept="image/*" /></div>
-                  <div class="form-field"><label>View 5</label><input class="extraPhoto" type="file" accept="image/*" /></div>
-                </div>
-
-                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">
-                  <button class="btn btn-primary" onclick="saveVehicle()">Save Vehicle</button>
-                  <button class="btn btn-outline" onclick="clearVehicleForm()">Clear Form</button>
-                </div>
+              <div style="margin-top:14px;"><label>Description</label><textarea id="vDescription" placeholder="Short vehicle description"></textarea></div>
+              <div class="form-grid-3" style="margin-top:14px;">
+                <div><label class="checkline"><input id="vFeatured" type="checkbox" /> Featured vehicle</label><label class="checkline"><input id="showService" type="checkbox" /> Show service history</label><input id="vService" placeholder="Full service history" style="margin-top:8px;" /></div>
+                <div><label class="checkline"><input id="showRoadworthy" type="checkbox" /> Show roadworthy</label><input id="vRoadworthy" placeholder="Roadworthy included" style="margin-top:8px;" /></div>
+                <div><label class="checkline"><input id="showWarranty" type="checkbox" /> Show warranty</label><input id="vWarranty" placeholder="Warranty included" style="margin-top:8px;" /></div>
               </div>
-
-              <div id="vehiclesSection" class="panel-card dash-tab">
-                <div class="section-head" style="margin-top:0;">
-                  <div>
-                    <h2 style="font-size:24px;">My Vehicles</h2>
-                    <p>Manage your current stock.</p>
-                  </div>
-                </div>
-                <div id="myVehiclesList" class="dash-vehicle-list"></div>
+              <div class="form-grid-3" style="margin-top:14px;">
+                <div><label>Main Photo</label><input id="mainPhoto" type="file" accept="image/*" /></div>
+                <div><label>View 1</label><input class="extraPhoto" type="file" accept="image/*" /></div>
+                <div><label>View 2</label><input class="extraPhoto" type="file" accept="image/*" /></div>
+                <div><label>View 3</label><input class="extraPhoto" type="file" accept="image/*" /></div>
+                <div><label>View 4</label><input class="extraPhoto" type="file" accept="image/*" /></div>
+                <div><label>View 5</label><input class="extraPhoto" type="file" accept="image/*" /></div>
               </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+                <button class="btn btn-primary" onclick="saveVehicle()">Save Vehicle</button>
+                <button class="btn btn-white" onclick="clearVehicleForm()">Clear Form</button>
+              </div>
+            </div>
+
+            <div id="vehiclesSection" class="dash-panel dash-tab">
+              <div class="section-head" style="margin-top:0;">
+                <div><h2 style="font-size:24px;">My Vehicles</h2><p>Manage your current stock.</p></div>
+                <button class="btn btn-primary" onclick="activateDashTab(document.querySelectorAll('.side-links button')[3],'addVehicleSection')">Add Vehicle</button>
+              </div>
+              <div id="myVehiclesList" class="dash-list"></div>
             </div>
           </div>
         </div>
@@ -1056,34 +1078,25 @@
     </section>
 
     <section id="sellerYardView" class="hidden">
-      <div class="seller-yard-shell">
-        <div class="seller-yard-head">
-          <div class="seller-profile-card">
-            <div id="sellerCover" class="seller-cover"></div>
-            <div class="seller-body">
+      <div class="seller-yard">
+        <div class="seller-head">
+          <div class="seller-profile">
+            <div class="seller-cover"></div>
+            <div class="seller-info">
               <h2 id="publicSellerName">Seller Yard</h2>
               <p id="publicSellerLocation"></p>
               <p id="publicSellerAbout"></p>
-              <div class="seller-actions">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
                 <a id="sellerCallBtn" class="btn btn-primary">Call</a>
                 <a id="sellerTextBtn" class="btn btn-soft">Message</a>
-                <button class="btn btn-outline" onclick="shareCurrentPage()">Share</button>
+                <button class="btn btn-white" onclick="shareCurrentPage()">Share</button>
               </div>
-              <div class="trust-row">
-                <span>All cars roadworthy</span>
-                <span>Secure payments</span>
-                <span>Finance available</span>
-                <span>Trade-ins welcome</span>
-              </div>
+              <div class="trust-row"><span>Local seller</span><span>Simple enquiries</span><span>Own car yard link</span></div>
             </div>
           </div>
-
           <div>
             <div class="section-head" style="margin-top:0;">
-              <div>
-                <h2 id="sellerVehicleHeading">Vehicles for Sale</h2>
-                <p>Vehicles currently listed by this seller.</p>
-              </div>
+              <div><h2 id="sellerVehicleHeading">Vehicles for Sale</h2><p>Vehicles currently listed by this seller.</p></div>
               <button class="btn btn-soft" onclick="showView('home')">Back to Marketplace</button>
             </div>
             <div id="sellerVehiclesGrid" class="vehicle-grid"></div>
@@ -1091,8 +1104,7 @@
         </div>
       </div>
     </section>
-  </div>
-</div>
+  </main>
 
 <script type="module">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -1130,135 +1142,102 @@ let currentProfile = null;
 let myVehicles = [];
 let marketplaceVehicles = [];
 
-const $ = (id) => document.getElementById(id);
-const qs = (s) => document.querySelector(s);
-const qsa = (s) => Array.from(document.querySelectorAll(s));
+const $ = id => document.getElementById(id);
+const qsa = selector => Array.from(document.querySelectorAll(selector));
 
-function showNotice(id, text, isError=false){
-  const el = $(id);
-  el.textContent = text;
+function showNotice(id,text,isError=false){
+  const el=$(id);
+  el.textContent=text;
   el.classList.remove("hidden");
-  el.classList.toggle("error", isError);
+  el.classList.toggle("error",isError);
 }
-function hideNotice(id){
-  $(id).classList.add("hidden");
-  $(id).classList.remove("error");
-}
-function cleanPhone(phone){ return String(phone || "").replace(/[^\d+]/g, ""); }
-function slugify(text){ return String(text || "").toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
-function money(n){ return n === null || n === undefined || n === "" ? "Price on enquiry" : "$" + Number(n).toLocaleString(); }
+function hideNotice(id){$(id).classList.add("hidden");$(id).classList.remove("error")}
+function slugify(text){return String(text||"").toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}
+function cleanPhone(phone){return String(phone||"").replace(/[^\d+]/g,"")}
+function money(n){return n===null||n===undefined||n===""?"Price on enquiry":"$"+Number(n).toLocaleString()}
+function initials(name){return String(name||"YC").split(" ").map(x=>x[0]).join("").slice(0,2).toUpperCase()}
 function placeholder(){
-  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='#e8edf6'/><g fill='#8ca0c7'><rect x='140' y='260' width='520' height='76' rx='28'/><rect x='270' y='210' width='240' height='74' rx='22'/><circle cx='250' cy='350' r='42'/><circle cx='555' cy='350' r='42'/></g><text x='50%' y='86%' text-anchor='middle' font-family='Arial' font-size='28' fill='#5e7195'>Vehicle Photo</text></svg>");
+  return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='#e8edf6'/><g fill='#8ba0c2'><rect x='135' y='258' width='530' height='78' rx='30'/><rect x='268' y='208' width='245' height='75' rx='22'/><circle cx='250' cy='352' r='42'/><circle cx='560' cy='352' r='42'/></g><text x='50%' y='86%' text-anchor='middle' font-family='Arial' font-size='28' fill='#667a9f'>Vehicle Photo</text></svg>");
 }
 function statusClass(status){
-  if(status === "Sold") return "sold";
-  if(status === "Coming Soon") return "pending";
+  if(status==="Sold") return "sold";
+  if(status==="Coming Soon") return "pending";
   return "available";
 }
-function openMyPublicYard(){
-  if(currentProfile?.slug){
-    window.open(location.origin + location.pathname + "?seller=" + currentProfile.slug, "_blank");
-  } else {
-    showNotice("dashboardNotice", "Please save your profile first so your yard link can be created.", true);
-  }
-}
-window.openMyPublicYard = openMyPublicYard;
+function scrollToHowItWorks(){showView("home");setTimeout(()=>document.getElementById("howItWorks").scrollIntoView({behavior:"smooth"}),50)}
+window.scrollToHowItWorks=scrollToHowItWorks;
 
-window.copyYardLink = async function(){
-  if(!currentProfile?.slug){
-    showNotice("dashboardNotice", "Please save your profile first.", true);
-    return;
-  }
-  const link = location.origin + location.pathname + "?seller=" + currentProfile.slug;
-  await navigator.clipboard.writeText(link);
-  showNotice("dashboardNotice", "Yard link copied.");
-}
-
-window.showView = function(view){
-  ["homeView","authView","dashboardView","sellerYardView"].forEach(id => $(id).classList.add("hidden"));
-  if(view === "home") $("homeView").classList.remove("hidden");
-  if(view === "auth") $("authView").classList.remove("hidden");
-  if(view === "dashboard") $("dashboardView").classList.remove("hidden");
-  if(view === "sellerYard") $("sellerYardView").classList.remove("hidden");
+window.showView=function(view){
+  ["homeView","authView","dashboardView","sellerYardView"].forEach(id=>$(id).classList.add("hidden"));
+  if(view==="home") $("homeView").classList.remove("hidden");
+  if(view==="auth") $("authView").classList.remove("hidden");
+  if(view==="dashboard") {$("dashboardView").classList.remove("hidden");renderDashboardState();}
+  if(view==="sellerYard") $("sellerYardView").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
 };
 
-window.activateDashTab = function(btn, sectionId){
-  qsa(".side-nav button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  qsa(".dash-tab").forEach(sec => sec.classList.remove("hidden"));
-  // Keep overview plus chosen section visible; hide other content cards if needed
-  ["profileSection","vehiclesSection","addVehicleSection","shareSection"].forEach(id => {
-    if(id !== sectionId) $(id).classList.add("hidden");
-  });
+window.activateDashTab=function(btn,sectionId){
+  qsa(".side-links button").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  qsa(".dash-tab").forEach(sec=>sec.classList.add("hidden"));
   $("overviewSection").classList.remove("hidden");
   $(sectionId).classList.remove("hidden");
 };
 
 function populateFilters(){
-  const make = $("filterMake").value;
-  $("filterMake").innerHTML = '<option value="">All Makes</option>' + Object.keys(MAKES).sort().map(m => `<option value="${m}">${m}</option>`).join("");
-  if(make) $("filterMake").value = make;
-  const models = make ? (MAKES[make] || []) : [...new Set(Object.values(MAKES).flat())].sort();
-  $("filterModel").innerHTML = '<option value="">All Models</option>' + models.map(m => `<option value="${m}">${m}</option>`).join("");
+  const make=$("filterMake").value;
+  $("filterMake").innerHTML='<option value="">All Makes</option>'+Object.keys(MAKES).sort().map(m=>`<option value="${m}">${m}</option>`).join("");
+  if(make) $("filterMake").value=make;
+  const models=make ? (MAKES[make]||[]) : [...new Set(Object.values(MAKES).flat())].sort();
+  $("filterModel").innerHTML='<option value="">All Models</option>'+models.map(m=>`<option value="${m}">${m}</option>`).join("");
 }
+$("filterMake").addEventListener("change",()=>{populateFilters();renderMarketplace()});
+$("filterModel").addEventListener("change",renderMarketplace);
+$("filterFuel").addEventListener("change",renderMarketplace);
 
-$("filterMake").addEventListener("change", () => {
+window.clearFilters=function(){
+  $("searchInput").value="";
+  $("filterMake").value="";
   populateFilters();
-  renderMarketplace();
-});
-$("filterModel").addEventListener("change", renderMarketplace);
-$("filterFuel").addEventListener("change", renderMarketplace);
-
-window.clearFilters = function(){
-  $("searchInput").value = "";
-  $("filterMake").value = "";
-  populateFilters();
-  $("filterModel").value = "";
-  $("filterFuel").value = "";
+  $("filterModel").value="";
+  $("filterFuel").value="";
   renderMarketplace();
 };
 
 async function loadSession(){
-  const { data } = await supabase.auth.getSession();
-  currentUser = data.session?.user || null;
+  const {data}=await supabase.auth.getSession();
+  currentUser=data.session?.user||null;
   if(currentUser) await loadProfile();
-  updateTopButtons();
+  updateTopButton();
 }
-
-function updateTopButtons(){
-  $("loginTopBtn").textContent = currentUser ? "My Dashboard" : "Login";
-  $("loginTopBtn").onclick = () => showView(currentUser ? "dashboard" : "auth");
+function updateTopButton(){
+  $("loginTopBtn").textContent=currentUser?"Dashboard":"Login";
+  $("loginTopBtn").onclick=()=>showView(currentUser?"dashboard":"auth");
 }
 
 async function loadProfile(){
   if(!currentUser) return;
-  const { data, error } = await supabase.from("profiles").select("*").eq("user_id", currentUser.id).maybeSingle();
-  if(error){
-    console.error(error);
-    return;
-  }
-  currentProfile = data || null;
-  if(currentProfile){
-    fillProfileForm();
-  }
-  renderDashboardState();
+  const {data,error}=await supabase.from("profiles").select("*").eq("user_id",currentUser.id).maybeSingle();
+  if(error){console.error(error);return}
+  currentProfile=data||null;
+  if(currentProfile) fillProfileForm();
 }
 
 function fillProfileForm(){
-  if(!currentProfile) return;
-  $("yardName").value = currentProfile.yard_name || "";
-  $("yardSlug").value = currentProfile.slug || "";
-  $("displayName").value = currentProfile.display_name || "";
-  $("sellerSuburb").value = currentProfile.suburb || "";
-  $("sellerState").value = currentProfile.state || "";
-  $("sellerPhone").value = currentProfile.phone || "";
-  $("sellerSms").value = currentProfile.sms || "";
-  $("sellerEmail").value = currentProfile.email || "";
-  $("sellerAbout").value = currentProfile.about || "";
-  $("showEmailToggle").checked = currentProfile.show_email !== false;
-  $("welcomeHeading").textContent = "Welcome back" + (currentProfile.display_name ? ", " + currentProfile.display_name : "") + ".";
-  const link = location.origin + location.pathname + "?seller=" + currentProfile.slug;
-  $("shareLinkBox").textContent = link;
+  const p=currentProfile;
+  $("yardName").value=p.yard_name||"";
+  $("yardSlug").value=p.slug||"";
+  $("displayName").value=p.display_name||"";
+  $("sellerSuburb").value=p.suburb||"";
+  $("sellerState").value=p.state||"";
+  $("sellerPhone").value=p.phone||"";
+  $("sellerSms").value=p.sms||"";
+  $("sellerEmail").value=p.email||"";
+  $("sellerAbout").value=p.about||"";
+  $("showEmailToggle").checked=p.show_email!==false;
+  $("welcomeHeading").textContent="Welcome back"+(p.display_name?", "+p.display_name:"")+".";
+  const link=location.origin+location.pathname+"?seller="+p.slug;
+  $("shareLinkBox").textContent=link;
   $("shareLinkBox").classList.remove("hidden");
 }
 
@@ -1266,421 +1245,297 @@ function renderDashboardState(){
   if(!currentUser){
     $("dashboardLoggedOut").classList.remove("hidden");
     $("dashboardLoggedIn").classList.add("hidden");
-  } else {
+  }else{
     $("dashboardLoggedOut").classList.add("hidden");
     $("dashboardLoggedIn").classList.remove("hidden");
+    if(currentProfile) fillProfileForm();
+    loadMyVehicles();
   }
 }
-
-window.signUp = async function(){
+window.signUp=async function(){
   hideNotice("authNotice");
-  const email = $("signupEmail").value.trim();
-  const password = $("signupPassword").value;
-  const { error } = await supabase.auth.signUp({ email, password });
-  if(error){
-    showNotice("authNotice", error.message, true);
-    return;
-  }
-  showNotice("authNotice", "Account created. Check your email to confirm your sign up.");
+  const email=$("signupEmail").value.trim();
+  const password=$("signupPassword").value;
+  const {error}=await supabase.auth.signUp({email,password});
+  if(error){showNotice("authNotice",error.message,true);return}
+  showNotice("authNotice","Account created. Check your email to confirm your sign up.");
 };
-
-window.login = async function(){
+window.login=async function(){
   hideNotice("authNotice");
-  const email = $("loginEmail").value.trim();
-  const password = $("loginPassword").value;
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if(error){
-    showNotice("authNotice", error.message, true);
-    return;
-  }
-  currentUser = data.user;
+  const email=$("loginEmail").value.trim();
+  const password=$("loginPassword").value;
+  const {data,error}=await supabase.auth.signInWithPassword({email,password});
+  if(error){showNotice("authNotice",error.message,true);return}
+  currentUser=data.user;
   await loadProfile();
-  updateTopButtons();
+  updateTopButton();
   showView("dashboard");
-  showNotice("dashboardNotice", "Logged in successfully.");
+  showNotice("dashboardNotice","Logged in successfully.");
 };
-
-window.logout = async function(){
+window.logout=async function(){
   await supabase.auth.signOut();
-  currentUser = null;
-  currentProfile = null;
-  myVehicles = [];
-  updateTopButtons();
+  currentUser=null;currentProfile=null;myVehicles=[];
+  updateTopButton();
   renderDashboardState();
   showView("home");
 };
 
-window.saveProfile = async function(){
+window.saveProfile=async function(){
   hideNotice("dashboardNotice");
-  if(!currentUser){
-    showNotice("dashboardNotice", "Please log in first.", true);
-    return;
-  }
-  const yardName = $("yardName").value.trim();
-  const slug = slugify($("yardSlug").value || yardName);
-  if(!yardName || !slug){
-    showNotice("dashboardNotice", "Please enter a yard name and a link slug.", true);
-    return;
-  }
-  const payload = {
-    user_id: currentUser.id,
-    yard_name: yardName,
+  if(!currentUser){showNotice("dashboardNotice","Please log in first.",true);return}
+  const yardName=$("yardName").value.trim();
+  const slug=slugify($("yardSlug").value||yardName);
+  if(!yardName||!slug){showNotice("dashboardNotice","Please enter a yard name and a link slug.",true);return}
+  const payload={
+    user_id:currentUser.id,
+    yard_name:yardName,
     slug,
-    display_name: $("displayName").value.trim(),
-    suburb: $("sellerSuburb").value.trim(),
-    state: $("sellerState").value.trim(),
-    phone: $("sellerPhone").value.trim(),
-    sms: $("sellerSms").value.trim(),
-    email: $("sellerEmail").value.trim(),
-    about: $("sellerAbout").value.trim(),
-    show_email: $("showEmailToggle").checked,
-    is_active: true
+    display_name:$("displayName").value.trim(),
+    suburb:$("sellerSuburb").value.trim(),
+    state:$("sellerState").value.trim(),
+    phone:$("sellerPhone").value.trim(),
+    sms:$("sellerSms").value.trim(),
+    email:$("sellerEmail").value.trim(),
+    about:$("sellerAbout").value.trim(),
+    show_email:$("showEmailToggle").checked,
+    is_active:true
   };
-  const { data, error } = await supabase.from("profiles").upsert(payload, { onConflict: "user_id" }).select().single();
-  if(error){
-    showNotice("dashboardNotice", error.message, true);
-    return;
-  }
-  currentProfile = data;
+  const {data,error}=await supabase.from("profiles").upsert(payload,{onConflict:"user_id"}).select().single();
+  if(error){showNotice("dashboardNotice",error.message,true);return}
+  currentProfile=data;
   fillProfileForm();
-  showNotice("dashboardNotice", "Profile saved.");
+  showNotice("dashboardNotice","Profile saved.");
   await loadMarketplaceVehicles();
 };
 
-async function uploadVehicleFile(file, vehicleId, sortOrder, isMain=false){
-  if(!file) return null;
-  const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
-  const path = `${currentUser.id}/${vehicleId}/${Date.now()}-${sortOrder}.${ext}`;
-  const { error: uploadError } = await supabase.storage.from("vehicle-images").upload(path, file, { upsert:false });
-  if(uploadError) throw uploadError;
-  const { data } = supabase.storage.from("vehicle-images").getPublicUrl(path);
-  const { error } = await supabase.from("vehicle_images").insert({
-    vehicle_id: vehicleId,
-    image_url: data.publicUrl,
-    storage_path: path,
-    sort_order: sortOrder,
-    is_main: isMain
-  });
+async function uploadVehicleFile(file,vehicleId,sortOrder,isMain=false){
+  if(!file) return;
+  const ext=(file.name.split(".").pop()||"jpg").toLowerCase();
+  const path=`${currentUser.id}/${vehicleId}/${Date.now()}-${sortOrder}.${ext}`;
+  const {error:upErr}=await supabase.storage.from("vehicle-images").upload(path,file,{upsert:false});
+  if(upErr) throw upErr;
+  const {data}=supabase.storage.from("vehicle-images").getPublicUrl(path);
+  const {error}=await supabase.from("vehicle_images").insert({vehicle_id:vehicleId,image_url:data.publicUrl,storage_path:path,sort_order:sortOrder,is_main:isMain});
   if(error) throw error;
-  return data.publicUrl;
 }
 
-window.saveVehicle = async function(){
+window.saveVehicle=async function(){
   hideNotice("dashboardNotice");
-  if(!currentProfile){
-    showNotice("dashboardNotice", "Please save your profile first.", true);
-    return;
-  }
-  const make = $("vMake").value.trim();
-  const model = $("vModel").value.trim();
-  if(!make || !model){
-    showNotice("dashboardNotice", "Please enter at least the make and model.", true);
-    return;
-  }
-  const editingId = $("editingVehicleId").value || null;
-  const payload = {
-    seller_id: currentProfile.id,
-    make,
-    model,
-    variant: $("vVariant").value.trim(),
-    year: $("vYear").value ? Number($("vYear").value) : null,
-    kilometres: $("vKms").value ? Number($("vKms").value) : null,
-    transmission: $("vTransmission").value.trim(),
-    fuel: $("vFuel").value.trim(),
-    body_type: $("vBodyType").value.trim(),
-    colour: $("vColour").value.trim(),
-    price: $("vPrice").value ? Number($("vPrice").value) : null,
-    price_label: $("vPriceLabel").value,
-    description: $("vDescription").value.trim(),
-    status: $("vStatus").value,
-    featured: $("vFeatured").checked,
-    show_service_history: $("showService").checked,
-    service_history: $("vService").value.trim(),
-    show_roadworthy: $("showRoadworthy").checked,
-    roadworthy: $("vRoadworthy").value.trim(),
-    show_warranty: $("showWarranty").checked,
-    warranty: $("vWarranty").value.trim()
+  if(!currentProfile){showNotice("dashboardNotice","Please save your profile first.",true);return}
+  const make=$("vMake").value.trim();
+  const model=$("vModel").value.trim();
+  if(!make||!model){showNotice("dashboardNotice","Please enter at least make and model.",true);return}
+  const editingId=$("editingVehicleId").value||null;
+  const payload={
+    seller_id:currentProfile.id,
+    make,model,
+    variant:$("vVariant").value.trim(),
+    year:$("vYear").value?Number($("vYear").value):null,
+    kilometres:$("vKms").value?Number($("vKms").value):null,
+    colour:$("vColour").value.trim(),
+    transmission:$("vTransmission").value.trim(),
+    fuel:$("vFuel").value.trim(),
+    body_type:$("vBodyType").value.trim(),
+    price:$("vPrice").value?Number($("vPrice").value):null,
+    price_label:$("vPriceLabel").value,
+    status:$("vStatus").value,
+    description:$("vDescription").value.trim(),
+    featured:$("vFeatured").checked,
+    show_service_history:$("showService").checked,
+    service_history:$("vService").value.trim(),
+    show_roadworthy:$("showRoadworthy").checked,
+    roadworthy:$("vRoadworthy").value.trim(),
+    show_warranty:$("showWarranty").checked,
+    warranty:$("vWarranty").value.trim()
   };
-
-  let result;
-  if(editingId){
-    result = await supabase.from("vehicles").update(payload).eq("id", editingId).select().single();
-  } else {
-    result = await supabase.from("vehicles").insert(payload).select().single();
-  }
-  if(result.error){
-    showNotice("dashboardNotice", result.error.message, true);
-    return;
-  }
-  const vehicleId = result.data.id;
-
+  const result=editingId
+    ? await supabase.from("vehicles").update(payload).eq("id",editingId).select().single()
+    : await supabase.from("vehicles").insert(payload).select().single();
+  if(result.error){showNotice("dashboardNotice",result.error.message,true);return}
+  const vehicleId=result.data.id;
   try{
-    const mainFile = $("mainPhoto").files[0];
-    if(mainFile) await uploadVehicleFile(mainFile, vehicleId, 0, true);
-    const extraInputs = qsa(".extraPhoto");
-    for(let i=0;i<extraInputs.length;i++){
-      if(extraInputs[i].files[0]) await uploadVehicleFile(extraInputs[i].files[0], vehicleId, i+1, false);
+    if($("mainPhoto").files[0]) await uploadVehicleFile($("mainPhoto").files[0],vehicleId,0,true);
+    const extras=qsa(".extraPhoto");
+    for(let i=0;i<extras.length;i++){
+      if(extras[i].files[0]) await uploadVehicleFile(extras[i].files[0],vehicleId,i+1,false);
     }
-  }catch(err){
-    showNotice("dashboardNotice", "Vehicle saved, but image upload failed: " + err.message, true);
-    await loadMyVehicles();
-    await loadMarketplaceVehicles();
-    return;
+  }catch(e){
+    showNotice("dashboardNotice","Vehicle saved, but image upload failed: "+e.message,true);
+    await loadMyVehicles();await loadMarketplaceVehicles();return;
   }
-
-  showNotice("dashboardNotice", "Vehicle saved.");
+  showNotice("dashboardNotice","Vehicle saved.");
   clearVehicleForm();
   await loadMyVehicles();
   await loadMarketplaceVehicles();
 };
 
-window.clearVehicleForm = function(){
-  ["editingVehicleId","vMake","vModel","vVariant","vYear","vKms","vColour","vTransmission","vFuel","vBodyType","vPrice","vDescription","vService","vRoadworthy","vWarranty"].forEach(id => $(id).value = "");
-  $("vPriceLabel").value = "Drive Away";
-  $("vStatus").value = "Available";
-  $("vFeatured").checked = false;
-  $("showService").checked = false;
-  $("showRoadworthy").checked = false;
-  $("showWarranty").checked = false;
-  $("mainPhoto").value = "";
-  qsa(".extraPhoto").forEach(el => el.value = "");
+window.clearVehicleForm=function(){
+  ["editingVehicleId","vMake","vModel","vVariant","vYear","vKms","vColour","vTransmission","vFuel","vBodyType","vPrice","vDescription","vService","vRoadworthy","vWarranty"].forEach(id=>$(id).value="");
+  $("vPriceLabel").value="Drive Away";
+  $("vStatus").value="Available";
+  ["vFeatured","showService","showRoadworthy","showWarranty"].forEach(id=>$(id).checked=false);
+  $("mainPhoto").value="";
+  qsa(".extraPhoto").forEach(el=>el.value="");
 };
 
 async function loadImagesForVehicle(vehicleId){
-  const { data } = await supabase.from("vehicle_images").select("*").eq("vehicle_id", vehicleId).order("is_main", { ascending:false }).order("sort_order");
-  return data || [];
+  const {data}=await supabase.from("vehicle_images").select("*").eq("vehicle_id",vehicleId).order("is_main",{ascending:false}).order("sort_order");
+  return data||[];
 }
 
 async function loadMyVehicles(){
-  if(!currentProfile){
-    myVehicles = [];
-    renderMyVehicles();
-    updateStats();
-    return;
-  }
-  const { data, error } = await supabase.from("vehicles").select("*").eq("seller_id", currentProfile.id).order("created_at", { ascending:false });
-  if(error){
-    showNotice("dashboardNotice", error.message, true);
-    return;
-  }
-  myVehicles = data || [];
+  if(!currentProfile){myVehicles=[];renderMyVehicles();updateStats();return}
+  const {data,error}=await supabase.from("vehicles").select("*").eq("seller_id",currentProfile.id).order("created_at",{ascending:false});
+  if(error){showNotice("dashboardNotice",error.message,true);return}
+  myVehicles=data||[];
   renderMyVehicles();
   updateStats();
 }
-
 function updateStats(){
-  $("statVehicles").textContent = myVehicles.length;
-  $("statAvailable").textContent = myVehicles.filter(v => v.status === "Available").length;
-  $("statComing").textContent = myVehicles.filter(v => v.status === "Coming Soon").length;
-  $("statSold").textContent = myVehicles.filter(v => v.status === "Sold").length;
+  $("statVehicles").textContent=myVehicles.length;
+  $("statAvailable").textContent=myVehicles.filter(v=>v.status==="Available").length;
+  $("statComing").textContent=myVehicles.filter(v=>v.status==="Coming Soon").length;
+  $("statSold").textContent=myVehicles.filter(v=>v.status==="Sold").length;
 }
-
 function renderMyVehicles(){
-  const box = $("myVehiclesList");
-  if(!myVehicles.length){
-    box.innerHTML = "<div class='notice'>No vehicles yet.</div>";
-    return;
-  }
-  Promise.all(myVehicles.map(async v => {
-    const imgs = await loadImagesForVehicle(v.id);
-    const main = imgs[0]?.image_url || placeholder();
-    return `
-      <div class="dash-vehicle-item">
-        <div class="dash-vehicle-thumb"><img src="${main}" alt=""></div>
-        <div>
-          <h4>${v.year || ""} ${v.make} ${v.model} ${v.variant || ""}</h4>
-          <p>${money(v.price)} • ${v.kilometres ? Number(v.kilometres).toLocaleString() + " km" : "KMs not listed"} • ${v.transmission || "Transmission not listed"} • ${v.fuel || "Fuel not listed"}</p>
-          <div style="margin-top:8px;"><span class="status-pill ${statusClass(v.status)}">${v.status}</span></div>
-        </div>
-        <div class="small-actions">
-          <button class="btn btn-soft" onclick='editVehicle(${JSON.stringify(v).replace(/'/g, "&apos;")})'>Edit</button>
-          <button class="btn btn-danger" onclick="deleteVehicle('${v.id}')">Delete</button>
-        </div>
-      </div>`;
-  })).then(rows => box.innerHTML = rows.join(""));
+  const box=$("myVehiclesList");
+  if(!myVehicles.length){box.innerHTML="<div class='notice'>No vehicles yet.</div>";return}
+  Promise.all(myVehicles.map(async v=>{
+    const imgs=await loadImagesForVehicle(v.id);
+    const img=imgs[0]?.image_url||placeholder();
+    return `<div class="dash-item">
+      <div class="dash-thumb"><img src="${img}" alt=""></div>
+      <div><h4>${v.year||""} ${v.make} ${v.model} ${v.variant||""}</h4><p>${money(v.price)} • ${v.kilometres?Number(v.kilometres).toLocaleString()+" km":"KMs not listed"} • ${v.status}</p></div>
+      <div class="small-actions"><button class="btn btn-soft" onclick='editVehicle(${JSON.stringify(v).replace(/'/g,"&apos;")})'>Edit</button><button class="btn btn-danger" onclick="deleteVehicle('${v.id}')">Delete</button></div>
+    </div>`;
+  })).then(rows=>box.innerHTML=rows.join(""));
 }
-
-window.editVehicle = function(v){
-  $("editingVehicleId").value = v.id || "";
-  $("vMake").value = v.make || "";
-  $("vModel").value = v.model || "";
-  $("vVariant").value = v.variant || "";
-  $("vYear").value = v.year || "";
-  $("vKms").value = v.kilometres || "";
-  $("vColour").value = v.colour || "";
-  $("vTransmission").value = v.transmission || "";
-  $("vFuel").value = v.fuel || "";
-  $("vBodyType").value = v.body_type || "";
-  $("vPrice").value = v.price || "";
-  $("vPriceLabel").value = v.price_label || "Drive Away";
-  $("vStatus").value = v.status || "Available";
-  $("vDescription").value = v.description || "";
-  $("vFeatured").checked = !!v.featured;
-  $("showService").checked = !!v.show_service_history;
-  $("vService").value = v.service_history || "";
-  $("showRoadworthy").checked = !!v.show_roadworthy;
-  $("vRoadworthy").value = v.roadworthy || "";
-  $("showWarranty").checked = !!v.show_warranty;
-  $("vWarranty").value = v.warranty || "";
-  showNotice("dashboardNotice", "Editing vehicle. Update the details and click Save Vehicle.");
-  activateDashTab(qsa(".side-nav button")[3], "addVehicleSection");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+window.editVehicle=function(v){
+  $("editingVehicleId").value=v.id||"";
+  $("vMake").value=v.make||"";
+  $("vModel").value=v.model||"";
+  $("vVariant").value=v.variant||"";
+  $("vYear").value=v.year||"";
+  $("vKms").value=v.kilometres||"";
+  $("vColour").value=v.colour||"";
+  $("vTransmission").value=v.transmission||"";
+  $("vFuel").value=v.fuel||"";
+  $("vBodyType").value=v.body_type||"";
+  $("vPrice").value=v.price||"";
+  $("vPriceLabel").value=v.price_label||"Drive Away";
+  $("vStatus").value=v.status||"Available";
+  $("vDescription").value=v.description||"";
+  $("vFeatured").checked=!!v.featured;
+  $("showService").checked=!!v.show_service_history;
+  $("vService").value=v.service_history||"";
+  $("showRoadworthy").checked=!!v.show_roadworthy;
+  $("vRoadworthy").value=v.roadworthy||"";
+  $("showWarranty").checked=!!v.show_warranty;
+  $("vWarranty").value=v.warranty||"";
+  activateDashTab(qsa(".side-links button")[3],"addVehicleSection");
+  showNotice("dashboardNotice","Editing vehicle. Update details and click Save Vehicle.");
 };
-
-window.deleteVehicle = async function(vehicleId){
+window.deleteVehicle=async function(vehicleId){
   if(!confirm("Delete this vehicle?")) return;
-  const { error } = await supabase.from("vehicles").delete().eq("id", vehicleId);
-  if(error){
-    showNotice("dashboardNotice", error.message, true);
-    return;
-  }
-  showNotice("dashboardNotice", "Vehicle deleted.");
+  const {error}=await supabase.from("vehicles").delete().eq("id",vehicleId);
+  if(error){showNotice("dashboardNotice",error.message,true);return}
+  showNotice("dashboardNotice","Vehicle deleted.");
   await loadMyVehicles();
   await loadMarketplaceVehicles();
 };
 
 async function loadMarketplaceVehicles(){
-  const { data, error } = await supabase.from("public_vehicle_listings").select("*").order("featured", { ascending:false }).order("created_at", { ascending:false });
-  if(error){
-    showNotice("homeNotice", error.message, true);
-    return;
-  }
-  marketplaceVehicles = data || [];
+  const {data,error}=await supabase.from("public_vehicle_listings").select("*").order("featured",{ascending:false}).order("created_at",{ascending:false});
+  if(error){showNotice("homeNotice",error.message,true);return}
+  marketplaceVehicles=data||[];
   await renderMarketplace();
 }
-
-window.renderMarketplace = async function(){
+window.renderMarketplace=async function(){
   hideNotice("homeNotice");
-  const grid = $("vehicleGrid");
-  let rows = [...marketplaceVehicles];
-  const q = $("searchInput").value.trim().toLowerCase();
-  const make = $("filterMake").value;
-  const model = $("filterModel").value;
-  const fuel = $("filterFuel").value;
-
-  if(make) rows = rows.filter(v => v.make === make);
-  if(model) rows = rows.filter(v => v.model === model);
-  if(fuel) rows = rows.filter(v => (v.fuel || "") === fuel);
-  if(q){
-    rows = rows.filter(v =>
-      [v.make,v.model,v.variant,v.year,v.yard_name,v.suburb,v.state,v.description,v.colour]
-      .join(" ").toLowerCase().includes(q)
-    );
-  }
-
-  if(!rows.length){
-    grid.innerHTML = "<div class='notice'>No vehicles found.</div>";
-    return;
-  }
-
-  const cards = await Promise.all(rows.map(async v => {
-    const imgs = await loadImagesForVehicle(v.id);
-    const img = v.main_image_url || imgs[0]?.image_url || placeholder();
-    return vehicleCardMarkup(v, img, false);
+  const grid=$("vehicleGrid");
+  let rows=[...marketplaceVehicles];
+  const q=$("searchInput").value.trim().toLowerCase();
+  const make=$("filterMake").value;
+  const model=$("filterModel").value;
+  const fuel=$("filterFuel").value;
+  if(make) rows=rows.filter(v=>v.make===make);
+  if(model) rows=rows.filter(v=>v.model===model);
+  if(fuel) rows=rows.filter(v=>(v.fuel||"")===fuel);
+  if(q) rows=rows.filter(v=>[v.make,v.model,v.variant,v.year,v.yard_name,v.suburb,v.state,v.description,v.colour].join(" ").toLowerCase().includes(q));
+  if(!rows.length){grid.innerHTML="<div class='notice'>No vehicles found.</div>";return}
+  const cards=await Promise.all(rows.map(async v=>{
+    const imgs=await loadImagesForVehicle(v.id);
+    const img=v.main_image_url||imgs[0]?.image_url||placeholder();
+    return vehicleCardMarkup(v,img);
   }));
-  grid.innerHTML = cards.join("");
+  grid.innerHTML=cards.join("");
 };
-
-function vehicleCardMarkup(v, img, sellerMode=false){
-  const sellerLine = `${v.yard_name || ""}${v.suburb ? " • " + v.suburb : ""}${v.state ? ", " + v.state : ""}`;
-  const emailBtn = v.seller_email ? `<a class="mini msg-btn" href="mailto:${v.seller_email}?subject=${encodeURIComponent("Vehicle Enquiry - " + v.make + " " + v.model)}">Email</a>` : "";
-  const callHref = cleanPhone(v.seller_phone || "");
-  const msgHref = cleanPhone(v.seller_sms || v.seller_phone || "");
-  const status = v.status || "Available";
-  const extraBadges = [];
-  if(v.show_service_history && v.service_history) extraBadges.push(v.service_history);
-  if(v.show_roadworthy && v.roadworthy) extraBadges.push(v.roadworthy);
-  if(v.show_warranty && v.warranty) extraBadges.push(v.warranty);
-
-  return `
-    <article class="vehicle-card">
-      <div class="vehicle-thumb">
-        ${v.featured ? '<div class="featured-tag">FEATURED</div>' : ''}
-        <img src="${img}" alt="">
+function vehicleCardMarkup(v,img){
+  const sellerLine=`${v.yard_name||""}${v.suburb?" • "+v.suburb:""}${v.state?", "+v.state:""}`;
+  const emailBtn=v.seller_email?`<a class="mini-btn mini-outline wide" href="mailto:${v.seller_email}?subject=${encodeURIComponent("Vehicle Enquiry - "+v.make+" "+v.model)}">Email Enquiry</a>`:"";
+  const callHref=cleanPhone(v.seller_phone||"");
+  const smsHref=cleanPhone(v.seller_sms||v.seller_phone||"");
+  const status=v.status||"Available";
+  return `<article class="vehicle-card">
+    <div class="vehicle-image">${v.featured?'<div class="ribbon">FEATURED</div>':''}<div class="heart">♡</div><img src="${img}" alt=""></div>
+    <div class="vehicle-body">
+      <span class="status ${statusClass(status)}">${status}</span>
+      <h3 class="vehicle-title">${v.year||""} ${v.make} ${v.model}${v.variant?" "+v.variant:""}</h3>
+      <p class="vehicle-price">${money(v.price)}</p>
+      <div class="vehicle-meta"><span>${v.kilometres?Number(v.kilometres).toLocaleString()+" km":"KMs N/A"}</span><span>${v.transmission||"Transmission N/A"}</span><span>${v.fuel||"Fuel N/A"}</span></div>
+      <div class="seller-line"><div class="avatar">${initials(v.yard_name)}</div><span>${sellerLine}</span></div>
+      <div class="card-actions">
+        ${callHref?`<a class="mini-btn mini-call" href="tel:${callHref}">Call</a>`:""}
+        ${smsHref?`<a class="mini-btn mini-msg" href="sms:${smsHref}">Text</a>`:""}
+        <button class="mini-btn mini-outline" onclick="shareVehicle('${String(v.make+" "+v.model).replace(/'/g,"")}','${money(v.price)}')">Share</button>
+        ${emailBtn}
       </div>
-      <div class="card-body">
-        <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">
-          <span class="status-pill ${statusClass(status)}">${status}</span>
-        </div>
-        <h3 class="vehicle-title">${v.year || ""} ${v.make} ${v.model}${v.variant ? " " + v.variant : ""}</h3>
-        <p class="vehicle-price">${money(v.price)}</p>
-        <p class="vehicle-sub">${sellerLine}</p>
-        <div class="meta-row">
-          <span>${v.kilometres ? Number(v.kilometres).toLocaleString() + " km" : "KMs N/A"}</span>
-          <span>${v.transmission || "Transmission N/A"}</span>
-          <span>${v.fuel || "Fuel N/A"}</span>
-          ${extraBadges.slice(0,1).map(x => `<span>${x}</span>`).join("")}
-        </div>
-        <div class="action-row">
-          ${callHref ? `<a class="mini call" href="tel:${callHref}">Call</a>` : ''}
-          ${msgHref ? `<a class="mini msg-btn" href="sms:${msgHref}">Message</a>` : ''}
-          ${emailBtn}
-          <button class="mini share" onclick="shareVehicle('${String(v.make + " " + v.model).replace(/'/g,"")}','${money(v.price)}')">Share</button>
-        </div>
-      </div>
-    </article>
-  `;
+    </div>
+  </article>`;
 }
-
-window.shareVehicle = async function(title, price){
-  const text = `${title} - ${price} on Your Car Yard`;
-  if(navigator.share){
-    try{
-      await navigator.share({ title, text, url: location.href });
-    }catch(e){}
-  }else{
-    await navigator.clipboard.writeText(text + " " + location.href);
-    alert("Copied to clipboard.");
-  }
+window.shareVehicle=async function(title,price){
+  const text=`${title} - ${price} on Your Car Yard`;
+  if(navigator.share){try{await navigator.share({title,text,url:location.href})}catch(e){}}
+  else{await navigator.clipboard.writeText(text+" "+location.href);alert("Copied to clipboard.")}
 };
-
-window.shareCurrentPage = async function(){
-  if(navigator.share){
-    try{ await navigator.share({ title:"Your Car Yard", url: location.href }); }catch(e){}
-  } else {
-    await navigator.clipboard.writeText(location.href);
-    alert("Link copied.");
-  }
+window.copyYardLink=async function(){
+  if(!currentProfile?.slug){showNotice("dashboardNotice","Please save your profile first.",true);return}
+  const link=location.origin+location.pathname+"?seller="+currentProfile.slug;
+  await navigator.clipboard.writeText(link);
+  showNotice("dashboardNotice","Yard link copied.");
+};
+window.openMyPublicYard=function(){
+  if(currentProfile?.slug) window.open(location.origin+location.pathname+"?seller="+currentProfile.slug,"_blank");
+  else showNotice("dashboardNotice","Please save your profile first.",true);
+};
+window.shareCurrentPage=async function(){
+  if(navigator.share){try{await navigator.share({title:"Your Car Yard",url:location.href})}catch(e){}}
+  else{await navigator.clipboard.writeText(location.href);alert("Link copied.")}
 };
 
 async function loadSellerYard(slug){
-  const { data: seller, error } = await supabase.from("profiles").select("*").eq("slug", slug).maybeSingle();
-  if(error || !seller){
-    showView("home");
-    showNotice("homeNotice", "Seller yard not found.", true);
-    return;
-  }
-  $("publicSellerName").textContent = seller.yard_name || "Seller Yard";
-  $("publicSellerLocation").textContent = [seller.suburb, seller.state].filter(Boolean).join(", ");
-  $("publicSellerAbout").textContent = seller.about || "Local seller with quality vehicles.";
-  $("sellerCallBtn").href = seller.phone ? `tel:${cleanPhone(seller.phone)}` : "#";
-  $("sellerTextBtn").href = seller.sms ? `sms:${cleanPhone(seller.sms)}` : (seller.phone ? `sms:${cleanPhone(seller.phone)}` : "#");
-
-  const { data: vehicles, error: vehicleError } = await supabase.from("public_vehicle_listings").select("*").eq("seller_slug", slug).order("featured", { ascending:false }).order("created_at", { ascending:false });
-  if(vehicleError){
-    showView("home");
-    showNotice("homeNotice", vehicleError.message, true);
-    return;
-  }
-  $("sellerVehicleHeading").textContent = `Vehicles for Sale (${(vehicles || []).length})`;
-  const grid = $("sellerVehiclesGrid");
-  if(!(vehicles || []).length){
-    grid.innerHTML = "<div class='notice'>No vehicles listed for this seller yet.</div>";
-  } else {
-    const cards = await Promise.all((vehicles || []).map(async v => {
-      const imgs = await loadImagesForVehicle(v.id);
-      const img = v.main_image_url || imgs[0]?.image_url || placeholder();
-      return vehicleCardMarkup(v, img, true);
+  const {data:seller,error}=await supabase.from("profiles").select("*").eq("slug",slug).maybeSingle();
+  if(error||!seller){showView("home");showNotice("homeNotice","Seller yard not found.",true);return}
+  $("publicSellerName").textContent=seller.yard_name||"Seller Yard";
+  $("publicSellerLocation").textContent=[seller.suburb,seller.state].filter(Boolean).join(", ");
+  $("publicSellerAbout").textContent=seller.about||"Local seller with quality vehicles.";
+  $("sellerCallBtn").href=seller.phone?`tel:${cleanPhone(seller.phone)}`:"#";
+  $("sellerTextBtn").href=seller.sms?`sms:${cleanPhone(seller.sms)}`:(seller.phone?`sms:${cleanPhone(seller.phone)}`:"#");
+  const {data:vehicles,error:vehicleError}=await supabase.from("public_vehicle_listings").select("*").eq("seller_slug",slug).order("featured",{ascending:false}).order("created_at",{ascending:false});
+  if(vehicleError){showView("home");showNotice("homeNotice",vehicleError.message,true);return}
+  $("sellerVehicleHeading").textContent=`Vehicles for Sale (${(vehicles||[]).length})`;
+  const grid=$("sellerVehiclesGrid");
+  if(!(vehicles||[]).length){grid.innerHTML="<div class='notice'>No vehicles listed for this seller yet.</div>"}
+  else{
+    const cards=await Promise.all((vehicles||[]).map(async v=>{
+      const imgs=await loadImagesForVehicle(v.id);
+      const img=v.main_image_url||imgs[0]?.image_url||placeholder();
+      return vehicleCardMarkup(v,img);
     }));
-    grid.innerHTML = cards.join("");
+    grid.innerHTML=cards.join("");
   }
-
   $("homeHero").classList.add("hidden");
   showView("sellerYard");
-}
-
-function resetHomeHero(){
-  $("homeHero").classList.remove("hidden");
 }
 
 async function init(){
@@ -1689,16 +1544,9 @@ async function init(){
   renderDashboardState();
   await loadMarketplaceVehicles();
   await loadMyVehicles();
-
-  const sellerSlug = new URLSearchParams(location.search).get("seller");
-  if(sellerSlug){
-    await loadSellerYard(sellerSlug);
-  } else {
-    resetHomeHero();
-    showView("home");
-  }
+  const sellerSlug=new URLSearchParams(location.search).get("seller");
+  if(sellerSlug) await loadSellerYard(sellerSlug);
 }
-
 init();
 </script>
 </body>
